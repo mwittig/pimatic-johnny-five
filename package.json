@@ -1,0 +1,58 @@
+{
+  "name": "pimatic-johnny-five",
+  "description": "Pimatic Plugin which provides various johnny-fiveing functions for sensor data",
+  "author": {
+    "name": "Marcus Wittig",
+    "url": "https://github.com/mwittig"
+  },
+  "main": "johnny-five",
+  "files": [
+    "johnny-five.coffee",
+    "johnny-five-config-schema.coffee",
+    "device-config-schema.coffee",
+    "devices",
+    "assets",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "Johnny Five",
+    "Pimatic"
+  ],
+  "version": "0.0.0",
+  "homepage": "https://github.com/mwittig/pimatic-johnny-five/tree/master",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mwittig/pimatic-johnny-five.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mwittig/pimatic-johnny-five/issues"
+  },
+  "license": "AGPL-3.0",
+  "maintainers": [
+    {
+      "name": "mwittig",
+      "url": "https://github.com/mwittig"
+    }
+  ],
+  "configSchema": "johnny-five-config-schema.coffee",
+  "dependencies": {
+    "etherport": "https://github.com/mwittig/etherport.git",
+    "firmata": "^0.8.0",
+    "johnny-five": "^0.9.17",
+    "oled-font-5x7": "^1.0.0",
+    "oled-js": "^4.0.1",
+    "pimatic-plugin-commons": "^0.8.3"
+  },
+  "optionalDependencies": {
+    "raspi-io": "^5.0.0"
+  },
+  "peerDependencies": {
+    "pimatic": "0.8.*"
+  },
+  "engines": {
+    "node": ">0.8.x",
+    "npm": ">1.1.x"
+  }
+}
