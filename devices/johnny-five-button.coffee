@@ -16,7 +16,7 @@ module.exports = (env) ->
     constructor: (@config, @plugin, lastState) ->
       @id = config.id
       @name = config.name
-      @debug = true
+      @debug = @plugin.config.debug || false
       @_contact = false
       @_base = commons.base @, config.class
       @board = plugin.boardManager.getBoard(config.boardId)

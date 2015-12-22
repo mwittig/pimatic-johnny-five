@@ -16,7 +16,7 @@ module.exports = (env) ->
     constructor: (@config, @plugin, lastState) ->
       @id = config.id
       @name = config.name
-      @debug = true
+      @debug = @plugin.config.debug || false
       @_invert = config.invert || false
       @_contact = @_invert
       @_base = commons.base @, config.class
@@ -50,7 +50,8 @@ module.exports = (env) ->
         .then =>
           try
             @pin.query((state) =>
-              resolve if state.state is 1 then !@_invert else @_invert
+              @_base.debug "Queried state is:", state.value
+              resolve if state.value is 1 then !@_invert else @_invert
             )
           catch e
             @_base.rejectWithError reject, e

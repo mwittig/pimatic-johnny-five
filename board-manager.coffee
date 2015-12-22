@@ -29,20 +29,20 @@ module.exports = (env) ->
       )
 
     _boardReadyHandler: (resolve, reject) ->
-      return =>
+      return () =>
         @boardIsReady = true
         @removeListener "error", @_boardNotReadyHandler(resolve, reject)
-        return resolve @board
+        resolve @board
 
     _boardNotReadyHandler: (resolve, reject) ->
       return (error) =>
         @removeListener "ready", @_boardReadyHandler(resolve, reject)
-        return @_base.rejectWithError(reject, error)
+        @_base.rejectWithError(reject, error)
 
     boardReady: () ->
       return new Promise( (resolve, reject) =>
         Promise.settle([@boardInit])
-        .then =>
+        .then () =>
           if @boardIsReady
             resolve @
           else
@@ -64,10 +64,11 @@ module.exports = (env) ->
         for boardConfig in @config.boards
           if boardConfig.id?
             try
-              boardConfig.debug = @debug
-              @boards[boardConfig.id] = @createBoard(boardConfig)
+              config = _.assign {}, boardConfig
+              config.debug = @debug
+              @boards[config.id] = @createBoard(config)
             catch e
-              @_base.error "Creation of board #{boardConfig.id} raised exc exception:" + e
+              @_base.error "Creation of board #{boardConfig.id} raised exception:" + e
           else
             @_base.error "Invalid plugin configuration. Missing board id"
       else

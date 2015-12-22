@@ -21,7 +21,7 @@ module.exports = (env) ->
       @name = config.name
       @rows = config.rows || 2
       @cols = config.cols || 16
-      @debug = true
+      @debug = @plugin.config.debug || false
       @_base = commons.base @, config.class
 
       oledOptions =

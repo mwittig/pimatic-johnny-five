@@ -16,7 +16,7 @@ module.exports = (env) ->
     constructor: (@config, @plugin, lastState) ->
       @id = config.id
       @name = config.name
-      @debug = @plugin.debug || false
+      @debug = @plugin.config.debug || false
       @_base = commons.base @, config.class
       @_state = off
       @board = plugin.boardManager.getBoard(config.boardId)
@@ -24,6 +24,7 @@ module.exports = (env) ->
 
       @board.boardReady()
         .then (board)=>
+          @_base.debug "initializing digital output pin #{config.pin}"
           @pin = new five.Pin {
             pin: config.pin
             type: "digital"
@@ -44,7 +45,8 @@ module.exports = (env) ->
                 resolve @_state
               else
                 @pin.query((state) =>
-                  resolve if state.state is 1 then true else false
+                  @_base.debug "Queried state is:", state.value
+                  resolve if state.value is 1 then true else false
                 )
             catch e
               @_base.rejectWithError reject, e

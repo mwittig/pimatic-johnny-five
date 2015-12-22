@@ -28,7 +28,7 @@ module.exports = (env) ->
     constructor: (@config, @plugin, lastState) ->
       @id = config.id
       @name = config.name
-      @debug = @plugin.debug || false
+      @debug = @plugin.config.debug || false
       @_base = commons.base @, config.class
       @_temperature = lastState?.temperature?.value or null
       @_humidity = lastState?.humidity?.value or null

@@ -16,7 +16,7 @@ module.exports = (env) ->
     constructor: (@config, @plugin, lastState) ->
       @id = config.id
       @name = config.name
-      @debug = true
+      @debug = @plugin.config.debug || false
       @_dimlevel = 0
       @_state = off
       @_base = commons.base @, config.class
