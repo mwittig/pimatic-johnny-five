@@ -46,16 +46,16 @@ hardware boards you use, e.g., your Raspberry Pi, an Arduino board attached via 
 or a remote board connected via etherport. The following configuration 
 is an example for pimatic on windows with an Arduino Nano connected via USB on COM4:
 
-   {
-       "plugin": "johnny-five",
-       "boards": [
+    {
+        "plugin": "johnny-five",
+        "boards": [
            {
                "id": "1",
                "boardType": "arduino",
                "port": "COM4",
            }
-       ]
-   }
+        ]
+    }
 
 The plugin has the following configuration properties:
 
