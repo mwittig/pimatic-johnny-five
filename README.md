@@ -104,6 +104,7 @@ The Digital Output Device exhibits the following attributes:
 | state         | -     | Boolean | -       | Switch State, true is on, false is off |
 
 The following predicates and actions are supported:
+
 * {device} is turned on|off
 * switch {device} on|off
 * toggle {device}
@@ -136,6 +137,7 @@ The presence sensor exhibits the following attributes:
 | presence      | -     | Boolean | -       | Presence State, true is present, false is absent | 
 
 The following predicates are supported:
+
 * {device} is present|absent
 
 
@@ -168,6 +170,7 @@ The presence sensor exhibits the following attributes:
 
 
 The following predicates are supported:
+
 * {device} is opened|closed
 
 ### Button Device
@@ -195,23 +198,19 @@ The Button Device has the following configuration properties:
 | controller | ""       | String  | Controller interface type if an EVshield is used. Supports 'EVS_EV3' and 'EVS_NXT' shields |
 
 For wiring examples, see:
+
 * [Button](http://johnny-five.io/examples/button/)
 * [Button - Pull-up](http://johnny-five.io/examples/button-pullup/)
 * [Button - EVShield NXT](http://johnny-five.io/examples/button-EVS_NXT/)
 
 The following predicates are supported:
+
 * {device} is opened|closed
 
 ### Relay
 
 The Relay Device represents a single digital Relay attached to the physical board. You need
-to provide the address of the output `pin` controlling the relay. The Relay Device supports two wiring options:
-
-* "NO", Normally Open: When provided with any voltage supply, the output is on. The default mode is LOW or "off", 
-  requiring a HIGH signal to turn the relay off. 
-* "NC", Normally Closed: When provided with any voltage supply, the output is off. The default mode is LOW or “off”, 
-  requiring a HIGH signal to turn the relay on.
-
+to provide the address of the output `pin` controlling the relay. 
 
     {
         "id": "jf-r-1",
@@ -222,7 +221,15 @@ to provide the address of the output `pin` controlling the relay. The Relay Devi
         "type": "NO"
     }
     
+The Relay Device supports two wiring options:
+
+* "NO", Normally Open: When provided with any voltage supply, the output is on. The default mode is LOW or "off", 
+  requiring a HIGH signal to turn the relay off. 
+* "NC", Normally Closed: When provided with any voltage supply, the output is off. The default mode is LOW or “off”, 
+  requiring a HIGH signal to turn the relay on.
+    
 For wiring examples, see:
+
 * [Relay "NO" and "NC" wiring](http://johnny-five.io/examples/relay/)
 
     
