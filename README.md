@@ -206,18 +206,20 @@ The following predicates are supported:
 
 The Relay Device represents a single digital Relay attached to the physical board. You need
 to provide the address of the output `pin` controlling the relay. The Relay Device supports two wiring options:
+
 * "NO", Normally Open: When provided with any voltage supply, the output is on. The default mode is LOW or "off", 
   requiring a HIGH signal to turn the relay off. 
 * "NC", Normally Closed: When provided with any voltage supply, the output is off. The default mode is LOW or “off”, 
   requiring a HIGH signal to turn the relay on.
 
+
     {
-          "id": "jf-r-1",
-          "name": "Johnny Five Relay",
-          "class": "JohnnyFiveRelay",
-          "boardId": "1",
-          "pin": "12",
-          "type": "NO"
+        "id": "jf-r-1",
+        "name": "Johnny Five Relay",
+        "class": "JohnnyFiveRelay",
+        "boardId": "1",
+        "pin": "12",
+        "type": "NO"
     }
     
 For wiring examples, see:
@@ -239,24 +241,24 @@ supports 4,7k NTC thermistors ("TINKERKIT"), various I2C sensors, and the DS18B2
 Depending on type of sensor different properties are required.
 
     {
-          "id": "jf-t-1",
-          "name": "Johnny Five Temperature",
-          "class": "JohnnyFiveTemperature",
-          "boardId": "1",
-          "controller": "SI7020",
-          "address": "0x40",
-          "temperatureOffset": -1
-        },
-        {
-          "id": "jf-t-2",
-          "name": "Johnny Five Temperature 2",
-          "class": "JohnnyFiveTemperature",
-          "boardId": "1",
-          "pin": "A0",
-          "controller": "TINKERKIT",
-          "offset": -2.75,
-          "units": "metric"
-        },
+        "id": "jf-t-1",
+        "name": "Johnny Five Temperature",
+        "class": "JohnnyFiveTemperature",
+        "boardId": "1",
+        "controller": "SI7020",
+        "address": "0x40",
+        "temperatureOffset": -1
+    },
+    {
+        "id": "jf-t-2",
+        "name": "Johnny Five Temperature 2",
+        "class": "JohnnyFiveTemperature",
+        "boardId": "1",
+        "pin": "A0",
+        "controller": "TINKERKIT",
+        "offset": -2.75,
+        "units": "metric"
+    }
 
 The Temperature Sensor has the following configuration properties:
 
