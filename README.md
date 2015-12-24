@@ -273,7 +273,7 @@ The Temperature Sensor has the following configuration properties:
 For wiring examples, see:
 * [Temperature TINKERKIT](http://johnny-five.io/examples/tinkerkit-thermistor/)
     * If you don't have the tinkerkit shield, here's a 
-    [wiring sketch]((https://github.com/mwittig/pimatic-johnny-five/raw/master/assets/sketches/temperature-fritzing-4k7-thermistor.png) 
+    [wiring sketch](https://github.com/mwittig/pimatic-johnny-five/raw/master/assets/sketches/arduino-temperature-4k7-thermistor.png) 
     for the thermistor. 
 * [Temperature MPU6050](http://johnny-five.io/examples/temperature-mpu6050/)
 
