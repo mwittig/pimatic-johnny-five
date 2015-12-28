@@ -84,6 +84,10 @@ module.exports = (env) ->
           raspi = require 'raspi-io'
           @board = new BoardWrapper(_.assign({}, options, {io: new raspi(), repl: false}))
         )
+        when 'spark-io' then (
+          spark = require 'spark-io'
+          @board = new BoardWrapper(_.assign({}, options, {io: new spark(), repl: false}))
+        )
         when 'etherport' then (
           etherport = require 'etherport'
           firmata = require('firmata')

@@ -43,9 +43,10 @@
     "johnny-five": "^0.9.17",
     "oled-font-5x7": "^1.0.0",
     "oled-js": "^4.0.1",
-    "pimatic-plugin-commons": "^0.8.3"
+    "pimatic-plugin-commons": "^0.8.5"
   },
   "optionalDependencies": {
+    "particle-io": "^0.12.0",
     "raspi-io": "^5.0.0"
   },
   "peerDependencies": {

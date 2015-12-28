@@ -22,5 +22,16 @@ module.exports = {
             description: "Path or name of device port"
             type: "string"
             default: ""
+          token:
+            description: "Particle token. Only required for particle-io board type"
+            type: "string"
+            default: ""
+          deviceId:
+            description: "Particle devicde id. Only required for particle-io board type"
+            type: "string"
+            default: ""
+
+
+
 
 }

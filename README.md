@@ -4,7 +4,7 @@
 ![Logo](https://github.com/mwittig/pimatic-johnny-five/raw/master/assets/images/johnny-five-icon.png)
 
 Pimatic Plugin for [Johnny Five](http://johnny-five.io), a Robotics and IoT programming framework. Thanks to
-Johnny Five, you can easily integrate a wide range of sensors and actuators attached to an Arduino board or your
+Johnny Five, you can easily integrate a wide range of sensors and actuators attached to an Arduino board  or your
 Raspberry Pi. On Arduino, the universal Firmata library is used which implements a protocol for the communication with
 host computer. Thus, there is no need to modify the Arduino sketch when new sensors or actuators are connected to your
 Arduino. Johnny Five also supports a variety of [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) and
@@ -23,8 +23,8 @@ This version supports the following devices
 The OLED and LCD display devices are incomplete and, thus, should not be used. 
 They won't do anything useful anyway.
 
-Board-support has been mainly tested with "arduino". More testing for "raspi-io" will follow. The "etherport" 
-support is highly experimental at the moment.
+Board-support has been mainly tested with "arduino". More testing for "raspi-io" will follow. The "etherport" and
+"particle-io" support is highly experimental at the moment.
 
 ## Getting Started
 
@@ -69,8 +69,19 @@ The configuration for a board is an object comprising the following properties.
 | Property  | Default   | Type    | Description                                 |
 |:----------|:----------|:--------|:--------------------------------------------|
 | id        | -         | String  | Unique identifier used as a reference by a device configuration |
-| boardType | "arduino" | String  | The type of board, one of "arduino", "raspi-io", "etherport"    |
+| boardType | "arduino" | String  | The type of board, see supported types below |
 | port      | -         | String  | Path or name of device port                 |
+| token     | -         | String  | Particle token. Only required for particle-io board type |
+| deviceId  | -         | String  | Particle device id. Only required for particle-io board type |
+
+Supported `boardTypes`
+* "arduino" - see
+* "raspi-io" - see 
+* "particle-io" - experimental, should work for 
+  [Particle Photon](http://johnny-five.io/platform-support/#particle-photon) and
+  [Sparkfun Photon RedBoard](http://johnny-five.io/platform-support/#sparkfun-photon-redboard)
+* "etherport" - experimental, works for Arduinos with ethernet or wifi shields,
+                relay will be provided soon.
 
 
 ## Device Configuration
