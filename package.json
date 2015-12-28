@@ -10,6 +10,7 @@
     "johnny-five.coffee",
     "johnny-five-config-schema.coffee",
     "device-config-schema.coffee",
+    "board-manager.coffee",
     "devices",
     "assets",
     "LICENSE",
