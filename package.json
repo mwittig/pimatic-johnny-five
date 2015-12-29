@@ -48,7 +48,8 @@
   },
   "optionalDependencies": {
     "particle-io": "^0.12.0",
-    "raspi-io": "^5.0.0"
+    "raspi-io": "^5.1.0",
+    "serialport": "^2.0.5"
   },
   "peerDependencies": {
     "pimatic": "0.8.*"

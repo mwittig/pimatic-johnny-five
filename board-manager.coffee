@@ -78,6 +78,9 @@ module.exports = (env) ->
     createBoard: (options) ->
       switch options.boardType || 'arduino'
         when 'arduino' then (
+          if options.port? and options.baudrate?
+            SerialPort = require('serialport').SerialPort
+            options.port = new SerialPort(options.port, {baudrate: options.baudrate})
           @board = new BoardWrapper(_.assign({}, options, {repl: false}))
         )
         when 'raspi-io' then (
@@ -109,5 +112,5 @@ module.exports = (env) ->
         return board
       else
         error = new Error "Board not found"
-        _base.error error
+        @_base.error error
         throw error

@@ -22,14 +22,18 @@ module.exports = {
             description: "Path or name of device port"
             type: "string"
             default: ""
+          baudrate:
+            description: "The baudrate to use for serial communication"
+            type: "number"
+            required: false
           token:
             description: "Particle token. Only required for particle-io board type"
             type: "string"
-            default: ""
+            required: false
           deviceId:
-            description: "Particle devicde id. Only required for particle-io board type"
+            description: "Particle device id. Only required for particle-io board type"
             type: "string"
-            default: ""
+            required: false
 
 
 
