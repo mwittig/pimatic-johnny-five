@@ -39,7 +39,7 @@
   ],
   "configSchema": "johnny-five-config-schema.coffee",
   "dependencies": {
-    "etherport": "https://github.com/mwittig/etherport.git",
+    "etherport": "git://github.com/mwittig/etherport.git",
     "firmata": "^0.8.0",
     "johnny-five": "^0.9.17",
     "oled-font-5x7": "^1.0.0",
