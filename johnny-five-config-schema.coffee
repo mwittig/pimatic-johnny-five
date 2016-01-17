@@ -34,8 +34,12 @@ module.exports = {
             description: "Particle device id. Only required for particle-io board type"
             type: "string"
             required: false
-
-
-
-
+          controller:
+            description: "Expander controller type. Only required for expander board type"
+            type: "string"
+            required: false
+          address:
+            description: "Expander I2C address. Only used for expander board type"
+            type: "string"
+            required: false
 }

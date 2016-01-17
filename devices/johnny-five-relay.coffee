@@ -18,10 +18,10 @@ module.exports = (env) ->
       @debug = @plugin.config.debug || false
       @_base = commons.base @, config.class
       @_state = lastState?.state?.value or off
-      @board = plugin.boardManager.getBoard(config.boardId)
+      @boardHandle = plugin.boardManager.getBoard(config.boardId)
       super()
 
-      @board.boardReady()
+      @boardHandle.boardReady()
       .then( (board)=>
         @relay = new five.Relay {
           pin: config.pin
@@ -37,7 +37,7 @@ module.exports = (env) ->
 
     _queryState: () ->
       return new Promise( (resolve, reject) =>
-        @board.boardReady()
+        @boardHandle.boardReady()
           .then =>
             try
               resolve @relay.isOn
@@ -51,7 +51,7 @@ module.exports = (env) ->
     changeStateTo: (newState) ->
       @_common.debug "state change requested to: #{newState}"
       return new Promise( (resolve, reject) =>
-        @board.boardReady()
+        @boardHandle.boardReady()
           .then =>
             if newState
               @relay.on()

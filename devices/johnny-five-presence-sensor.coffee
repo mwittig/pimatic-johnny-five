@@ -9,7 +9,7 @@ module.exports = (env) ->
   # Device class representing an Johnny Five digital input
   class JohnnyFivePresenceSensor extends env.devices.PresenceSensor
 
-    # Create a new JohnnyFiveContactSensor device
+    # Create a new JohnnyFivePresenceSensor device
     # @param [Object] config    device configuration
     # @param [JohnnyFivePlugin] plugin   plugin instance
     # @param [Object] lastState state information stored in database
@@ -47,14 +47,8 @@ module.exports = (env) ->
     getPresence: () ->
       return new Promise( (resolve, reject) =>
         @board.boardReady()
-        .then =>
-          try
-            @pin.query((state) =>
-              @_base.debug "Queried state is:", state.value
-              resolve if state.value is 1 then !@_invert else @_invert
-            )
-          catch e
-            @_base.rejectWithError reject, e
-        .catch (error) =>
-          @_base.rejectWithError reject, error
+          .then =>
+            resolve @_presence
+          .catch (error) =>
+            @_base.rejectWithError reject, error
       )

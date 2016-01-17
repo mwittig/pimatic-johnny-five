@@ -41,11 +41,10 @@ module.exports = (env) ->
       else if config.units is "standard"
         @attributes["temperature"].unit = 'K'
         @_temperatureKey = "kelvin"
-      @debug = true
-      @board = plugin.boardManager.getBoard(config.boardId)
+      @boardHandle = plugin.boardManager.getBoard(config.boardId)
       super()
 
-      @board.boardReady()
+      @boardHandle.boardReady()
         .then( (board)=>
           try
             address = if address then parseInt(address) else undefined
@@ -72,11 +71,11 @@ module.exports = (env) ->
           @_base.rejectWithError null, error
 
     getTemperature: ->
-      @board.boardReady()
+      @boardHandle.boardReady()
         .then =>
           Promise.resolve(@_temperature)
 
     getHumidity: ->
-      @board.boardReady()
-      .then =>
-        Promise.resolve(@_humidity)
+      @boardHandle.boardReady()
+        .then =>
+          Promise.resolve(@_humidity)

@@ -3,23 +3,78 @@ module.exports = (env) ->
 
   Promise = env.require 'bluebird'
   _ = env.require 'lodash'
-  net = require 'net'
   events = require 'events'
-  url = require 'url'
   util = require 'util'
   five = require('johnny-five')
   commons = require('pimatic-plugin-commons')(env)
 
+  class ExpanderBoardMapper
+    constructor: (@opts) ->
+      @boardIsReady = false
+      @debug = @opts.debug || false
+      @id = @opts.id
+      @_base = commons.base @, "ExpanderBoard"
+      if not @opts.controller?
+        throw new Error "Missing controller property for expander board"
+
+      @boardInit = new Promise((resolve, reject) =>
+        if @opts.board.isReady
+          @_boardReadyHandler(resolve, reject)()
+        else
+          @_boardReadyListener = @_boardReadyHandler(resolve, reject)
+          @_boardNotReadyListener = @_boardNotReadyHandler(resolve, reject)
+          @opts.board.once "ready", @_boardReadyListener
+          @opts.board.once "error", @_boardNotReadyListener
+      )
+
+    _boardReadyHandler: (resolve, reject) ->
+      return () =>
+        @boardIsReady = true
+        expanderOptions =
+          controller: @opts.controller
+          address: @opts.address
+        @virtual = new five.Board({
+          io:  new five.Expander(expanderOptions),
+          board: @opts.board
+          repl: false,
+          debug: false,
+          sigint: false
+        })
+        @opts.board.removeListener "error", @_boardNotReadyListener if @_boardNotReadyListener?
+        @virtual.remote = false
+        @_base.debug "Board Ready"
+        resolve @virtual
+
+    _boardNotReadyHandler: (resolve, reject) ->
+      return (error) =>
+        @opts.board.removeListener "ready", @_boardReadyListener if @_boardReadyListener?
+        @_base.rejectWithError(reject, error)
+
+    boardReady: () ->
+      return new Promise( (resolve, reject) =>
+        Promise.settle([@boardInit])
+        .then () =>
+          if @boardIsReady
+            resolve @virtual
+          else
+            @_base.rejectWithError(reject, new Error "Board not ready")
+        .catch (error) =>
+          @_base.rejectWithError(reject, error)
+      )
+
+
   class BoardWrapper extends five.Board
     constructor: (opts) ->
+      super(opts)
       @boardIsReady = false
       @debug = opts.debug || false
-      super(opts)
       @_base = commons.base @, "Board"
 
       @boardInit = new Promise((resolve, reject) =>
-        @once "ready", @_boardReadyHandler(resolve, reject)
-        @once "error", @_boardNotReadyHandler(resolve, reject)
+        @_boardReadyListener = @_boardReadyHandler(resolve, reject)
+        @_boardNotReadyListener = @_boardNotReadyHandler(resolve, reject)
+        @once "ready", @_boardReadyListener
+        @once "error", @_boardNotReadyListener
         @on "message", (event) =>
           @_base.debug "Message received:", event.message
         @on "error", (error) =>
@@ -31,12 +86,12 @@ module.exports = (env) ->
     _boardReadyHandler: (resolve, reject) ->
       return () =>
         @boardIsReady = true
-        @removeListener "error", @_boardNotReadyHandler(resolve, reject)
+        @removeListener "error", @_boardNotReadyListener if @_boardNotReadyListener?
         resolve @board
 
     _boardNotReadyHandler: (resolve, reject) ->
       return (error) =>
-        @removeListener "ready", @_boardReadyHandler(resolve, reject)
+        @removeListener "ready", @_boardReadyListener if @_boardReadyListener?
         @_base.rejectWithError(reject, error)
 
     boardReady: () ->
@@ -97,8 +152,12 @@ module.exports = (env) ->
           @board = new BoardWrapper
             id: options.id
             io: new firmata.Board(new etherport({port: options.port}))
-            remote: true
+            remote: false
             repl: false
+        )
+        when 'expander' then (
+          parentBoard =  @getBoard options.port
+          @board = new ExpanderBoardMapper(_.assign({}, options, {board: parentBoard}))
         )
         else
           throw new Error "Unsupported boardType #{options.boardType}"

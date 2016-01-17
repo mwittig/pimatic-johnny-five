@@ -16,13 +16,13 @@ module.exports = (env) ->
     constructor: (@config, @plugin, lastState) ->
       @id = config.id
       @name = config.name
+      super()
       @debug = @plugin.config.debug || false
       @_base = commons.base @, config.class
       @_state = off
-      @board = plugin.boardManager.getBoard(config.boardId)
-      super()
+      @boardHandle = plugin.boardManager.getBoard(config.boardId)
 
-      @board.boardReady()
+      @boardHandle.boardReady()
         .then (board)=>
           @_base.debug "initializing digital output pin #{config.pin}"
           @pin = new five.Pin {
@@ -38,16 +38,13 @@ module.exports = (env) ->
 
     _queryState: () ->
       return new Promise( (resolve, reject) =>
-        @board.boardReady()
-          .then =>
+        @boardHandle.boardReady()
+          .then (board) =>
             try
-              if (@board.remote)
+              if (board.remote)
                 resolve @_state
               else
-                @pin.query((state) =>
-                  @_base.debug "Queried state is:", state.value
-                  resolve if state.value is 1 then true else false
-                )
+                resolve if @pin.value is 1 then true else false
             catch e
               @_base.rejectWithError reject, e
           .catch (error) =>
@@ -57,15 +54,15 @@ module.exports = (env) ->
     changeStateTo: (newState) ->
       @_base.debug "state change requested to: #{newState}"
       return new Promise (resolve, reject) =>
-        @board.boardReady()
-          .then =>
+        @boardHandle.boardReady()
+          .then (board)=>
             stateVal = if newState then 1 else 0
             try
               @pin.write stateVal
             catch e
               @_base.rejectWithError reject, e
 
-            if @board.remote
+            if board.remote
               @_setState newState
               resolve()
             else

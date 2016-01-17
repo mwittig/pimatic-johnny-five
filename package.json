@@ -41,10 +41,10 @@
   "dependencies": {
     "etherport": "git+https://github.com/mwittig/etherport.git",
     "firmata": "^0.8.0",
-    "johnny-five": "^0.9.17",
+    "johnny-five": "^0.9.18",
     "oled-font-5x7": "^1.0.0",
     "oled-js": "^4.0.1",
-    "pimatic-plugin-commons": "^0.8.5"
+    "pimatic-plugin-commons": "^0.8.6"
   },
   "optionalDependencies": {
     "particle-io": "^0.12.0",

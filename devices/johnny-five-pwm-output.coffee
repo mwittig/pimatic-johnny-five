@@ -20,27 +20,27 @@ module.exports = (env) ->
       @_dimlevel = 0
       @_state = off
       @_base = commons.base @, config.class
-      @board = plugin.boardManager.getBoard(config.boardId)
+      @boardHandle = plugin.boardManager.getBoard(config.boardId)
       super()
 
-      @board.boardReady()
-      .then( (board)=>
-        @pin = new five.Led {
-          pin: config.pin
-          board: board
-        }
-        @changeDimlevelTo(lastState?.dimlevel?.value or 0)
-          .catch (error) =>
-            @_base.rejectWithError null, error
-      )
-      .catch ((error) =>
-        @_base.rejectWithError null, error
+      @boardHandle.boardReady()
+        .then( (board)=>
+          @pin = new five.Led {
+            pin: config.pin
+            board: board
+          }
+          @changeDimlevelTo(lastState?.dimlevel?.value or 0)
+            .catch (error) =>
+              @_base.rejectWithError null, error
+        )
+        .catch ((error) =>
+          @_base.rejectWithError null, error
       )
 
 
     _queryLevel: () ->
       return new Promise( (resolve, reject) =>
-        @board.boardReady()
+        @boardHandle.boardReady()
           .then =>
             try
               resolve @pin.value * 100 / 255
@@ -54,7 +54,7 @@ module.exports = (env) ->
     changeDimlevelTo: (newLevelPerCent) ->
       @_base.debug "dimlevel change requested to (per cent): #{newLevelPerCent}"
       return new Promise( (resolve, reject) =>
-        @board.boardReady()
+        @boardHandle.boardReady()
           .then =>
             try
               @pin.brightness newLevelPerCent * 255 / 100

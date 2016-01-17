@@ -20,10 +20,10 @@ module.exports = (env) ->
       @_invert = config.invert || false
       @_contact = @_invert
       @_base = commons.base @, config.class
-      @board = plugin.boardManager.getBoard(config.boardId)
+      @boardHandle = plugin.boardManager.getBoard(config.boardId)
       super()
 
-      @board.boardReady()
+      @boardHandle.boardReady()
       .then (board)=>
         @pin = new five.Pin {
           pin: config.pin
@@ -31,7 +31,6 @@ module.exports = (env) ->
           mode: 0
           board: board
         }
-        @boardReady = true
         @pin.on("high", =>
           @_base.debug "#{@id} pin #{@config.pin} HIGH"
           @_setContact(!@_invert)
@@ -46,15 +45,9 @@ module.exports = (env) ->
 
     getContact: () ->
       return new Promise( (resolve, reject) =>
-        @board.boardReady()
-        .then =>
-          try
-            @pin.query((state) =>
-              @_base.debug "Queried state is:", state.value
-              resolve if state.value is 1 then !@_invert else @_invert
-            )
-          catch e
-            @_base.rejectWithError reject, e
-        .catch (error) =>
-          @_base.rejectWithError reject, error
+        @boardHandle.boardReady()
+          .then =>
+            resolve @_contact
+          .catch (error) =>
+            @_base.rejectWithError reject, error
       )

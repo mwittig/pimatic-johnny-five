@@ -20,7 +20,7 @@ This version supports the following devices
 * Temperature Sensor (analog, I2C and 1-Wire)
 * Temperature & Humidity Sensor (analog, I2C - sorry, no 1-Wire support, to date)
 
-The OLED and LCD display devices are incomplete and, thus, should not be used. 
+The OLED and LCD display devices are incomplete and, thus, should not be used.
 They won't do anything useful anyway.
 
 Board-support has been mainly tested with "arduino". More testing for "raspi-io" will follow. The "etherport" and
@@ -32,29 +32,45 @@ This section is still work in progress.
 
 ### Platform Support
 
-The plugin currently supports Arduino, Raspberry Pi boards, and tethering. More boards can be 
-added on request. The Johnny Five project provides a detailed 
-[list of supported platforms](https://johnny-five.io/platform-support/) with 
-detailed information on supported features and how to set up the board. 
+The plugin currently supports Arduino, Raspberry Pi boards, and tethering. More boards can be
+added on request. The Johnny Five project provides a detailed
+[list of supported platforms](https://johnny-five.io/platform-support/) with
+detailed information on supported features and how to set up the board.
 
 ## Plugin Configuration
 
 You can load the plugin by editing your `config.json` to include the following
 in the `plugins` section. You need to configure the boards you wish to use to control
-your devices. Generally, a board is a control system as part of pimatic to drive the 
-hardware boards you use, e.g., your Raspberry Pi, an Arduino board attached via USB,
-or a remote board connected via etherport. The following configuration 
-is an example for pimatic on windows with an Arduino Nano connected via USB on COM4:
+your devices. Generally, a board is a control system as part of pimatic to drive the
+hardware board you use, for example,
+* your Raspberry Pi,
+* an Arduino board attached to your Raspberry Pi via USB,
+* an I2C Expander chip connected to to your Raspberry Pi or Arduino, or
+* a remote board connected via etherport.
+
+The following configuration is an example for pimatic with an Arduino Nano
+connected via USB on ttyUSB1 and an Expander connected to the Arduino:
 
     {
         "plugin": "johnny-five",
         "boards": [
-           {
-               "id": "1",
-               "boardType": "arduino",
-               "port": "COM4",
-           }
-        ]
+        {
+          "id": "1",
+          "boardType": "arduino",
+          "port": "/dev/ttyUSB1",
+          "xbaudrate": 57600
+        },
+        {
+          "id": "2",
+          "boardType": "raspi-io"
+        },
+        {
+          "id": "3",
+          "boardType": "expander",
+          "port": "1",
+          "controller": "MCP23017"
+        }
+      ]
     }
 
 The plugin has the following configuration properties:
@@ -73,16 +89,42 @@ The configuration for a board is an object comprising the following properties.
 | port      | -         | String  | Path or name of device port                 |
 | token     | -         | String  | Particle token. Only required for particle-io board type |
 | deviceId  | -         | String  | Particle device id. Only required for particle-io board type |
+| controller  | -       | String  | Expander controller type (see below). Only required for expander board type |
+| address   | -         | String  | Expander I2C address (see below). Only used for expander board type |
 
 Supported `boardTypes`
-* "arduino" - see
-* "raspi-io" - see 
-* "particle-io" - experimental, should work for 
+* "arduino" - see [Platform Support](http://johnny-five.io/platform-support/)
+* "raspi-io" - works with all Raspberry Pi models (Zero has not been tested yet)
+* "particle-io" - experimental, should work for
   [Particle Photon](http://johnny-five.io/platform-support/#particle-photon) and
   [Sparkfun Photon RedBoard](http://johnny-five.io/platform-support/#sparkfun-photon-redboard)
-* "etherport" - experimental, works for Arduinos with ethernet or wifi shields,
-                relay will be provided soon.
+* "etherport" - experimental, works for Arduinos with ethernet or wifi shields, a software relay to integrate a remote Raspberry will be provided soon.
 
+Supported Expander `controller` types:
+
+* "MCP23017"
+* "MCP23008"
+* "PCF8574"
+* "PCF8574A"
+* "PCF8575"
+* "PCA9685"
+* "PCF8591"
+* "MUXSHIELD2"
+* "GROVEPI"
+
+The `address`needs only to be set if an I2C address other than the default
+address is used.
+
+| Controller | Address Range | Default |
+|------------|---------------|--------|
+| "MCP23017" | "0x20"-"0x27" | "0x20" |
+| "MCP23008" | "0x20"-"0x27" | "0x20" |
+| "PCF8574"  | "0x20"-"0x27" | "0x20" |
+| "PCF8574A" | "0x38"-"0x3F" | "0x38" |
+| "PCF8575"  | "0x20"-"0x27" | "0x20" |
+| "PCF8591"  | "0x48"-"0x4F" | "0x48" |
+| "PCA9685"  | "0x40"-"0x4F" | "0x40" |
+| "GROVEPI"  | "0x04"        | "0x04" |
 
 ## Device Configuration
 
@@ -142,10 +184,10 @@ It has the following configuration properties:
 | invert    | false    | Boolean | If true, invert the presence sensor state   |
 
 The presence sensor exhibits the following attributes:
-                    
+
 | Property      | Unit  | Type    | Acronym | Description                            |
 |:--------------|:------|:--------|:--------|:---------------------------------------|
-| presence      | -     | Boolean | -       | Presence State, true is present, false is absent | 
+| presence      | -     | Boolean | -       | Presence State, true is present, false is absent |
 
 The following predicates are supported:
 
@@ -174,10 +216,10 @@ It has the following configuration properties:
 | invert    | false    | Boolean | If true, invert the contact sensor state    |
 
 The presence sensor exhibits the following attributes:
-                    
+
 | Property      | Unit  | Type    | Acronym | Description                            |
 |:--------------|:------|:--------|:--------|:---------------------------------------|
-| contact       | -     | Boolean | -       | Contact State, true is opened, false is closed | 
+| contact       | -     | Boolean | -       | Contact State, true is opened, false is closed |
 
 
 The following predicates are supported:
@@ -221,7 +263,7 @@ The following predicates are supported:
 ### Relay
 
 The Relay Device represents a single digital Relay attached to the physical board. You need
-to provide the address of the output `pin` controlling the relay. 
+to provide the address of the output `pin` controlling the relay.
 
     {
         "id": "jf-r-1",
@@ -231,19 +273,19 @@ to provide the address of the output `pin` controlling the relay.
         "pin": "12",
         "type": "NO"
     }
-    
+
 The Relay Device supports two wiring options:
 
-* "NO", Normally Open: When provided with any voltage supply, the output is on. The default mode is LOW or "off", 
-  requiring a HIGH signal to turn the relay off. 
-* "NC", Normally Closed: When provided with any voltage supply, the output is off. The default mode is LOW or “off”, 
+* "NO", Normally Open: When provided with any voltage supply, the output is on. The default mode is LOW or "off",
+  requiring a HIGH signal to turn the relay off.
+* "NC", Normally Closed: When provided with any voltage supply, the output is off. The default mode is LOW or “off”,
   requiring a HIGH signal to turn the relay on.
-    
+
 For wiring examples, see:
 
 * [Relay "NO" and "NC" wiring](http://johnny-five.io/examples/relay/)
 
-    
+
 The Relay Device has the following configuration properties:
 
 | Property   | Default  | Type    | Description                                                                   |
@@ -254,8 +296,8 @@ The Relay Device has the following configuration properties:
 
 ### Temperature Sensor
 
-The Temperature Sensor is an input device based on the TemperatureSensor device class. It currently 
-supports 4,7k NTC thermistors ("TINKERKIT"), various I2C sensors, and the DS18B20 1Wire sensor. 
+The Temperature Sensor is an input device based on the TemperatureSensor device class. It currently
+supports 4,7k NTC thermistors ("TINKERKIT"), various I2C sensors, and the DS18B20 1Wire sensor.
 Depending on type of sensor different properties are required.
 
     {
@@ -292,9 +334,9 @@ The Temperature Sensor has the following configuration properties:
 
 For wiring examples, see:
 * [Temperature TINKERKIT](http://johnny-five.io/examples/tinkerkit-thermistor/)
-    * If you don't have the tinkerkit shield, here's a 
-    [wiring sketch](https://github.com/mwittig/pimatic-johnny-five/raw/master/assets/sketches/arduino-temperature-4k7-thermistor.png) 
-    for the thermistor. 
+    * If you don't have the tinkerkit shield, here's a
+    [wiring sketch](https://github.com/mwittig/pimatic-johnny-five/raw/master/assets/sketches/arduino-temperature-4k7-thermistor.png)
+    for the thermistor.
 * [Temperature MPU6050](http://johnny-five.io/examples/temperature-mpu6050/)
 
 ## Credits
