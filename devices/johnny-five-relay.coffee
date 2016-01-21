@@ -31,7 +31,7 @@ module.exports = (env) ->
         @changeStateTo(@_state)
       )
       .catch ((error) =>
-        @_common.rejectWithError null, error
+        @_base.rejectWithError null, error
       )
 
 
@@ -42,14 +42,14 @@ module.exports = (env) ->
             try
               resolve @relay.isOn
             catch e
-              @_common.rejectWithError reject, e
+              @_base.rejectWithError reject, e
           .catch (error) =>
-            @_common.rejectWithError reject, error
+            @_base.rejectWithError reject, error
       )
 
 
     changeStateTo: (newState) ->
-      @_common.debug "state change requested to: #{newState}"
+      @_base.debug "state change requested to: #{newState}"
       return new Promise( (resolve, reject) =>
         @boardHandle.boardReady()
           .then =>
@@ -60,7 +60,7 @@ module.exports = (env) ->
             @_setState newState
             resolve newState
           .catch (error) =>
-            @_common.rejectWithError reject, error
+            @_base.rejectWithError reject, error
       )
 
 
@@ -69,4 +69,4 @@ module.exports = (env) ->
         .then (state) =>
           return Promise.resolve state
         .catch (error) =>
-          return @_common.rejectWithError Promise.reject
+          return @_base.rejectWithError Promise.reject
