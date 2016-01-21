@@ -4,7 +4,7 @@
 ![Logo](https://github.com/mwittig/pimatic-johnny-five/raw/master/assets/images/johnny-five-icon.png)
 
 Pimatic Plugin for [Johnny Five](http://johnny-five.io), a Robotics and IoT programming framework. Thanks to
-Johnny Five, you can easily integrate a wide range of sensors and actuators attached to an Arduino board  or your
+Johnny Five, you can easily integrate a wide range of sensors and actuators attached to an Arduino board or your
 Raspberry Pi. On Arduino, the universal Firmata library is used which implements a protocol for the communication with
 host computer. Thus, there is no need to modify the Arduino sketch when new sensors or actuators are connected to your
 Arduino. Johnny Five also supports a variety of [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) and
@@ -13,7 +13,7 @@ Arduino. Johnny Five also supports a variety of [I2C](https://en.wikipedia.org/w
 ## Status of implementation
 
 This version supports the following devices
-* ContactSensor and PresenceSensor (digital input)
+* ContactSensor, PresenceSensor, and ButtonSensor (digital input)
 * Dimmer (digital output with PWM)
 * Switch (digital output)
 * Relay Switch (relay boards attached to digital output)
@@ -23,7 +23,7 @@ This version supports the following devices
 The OLED and LCD display devices are incomplete and, thus, should not be used.
 They won't do anything useful anyway.
 
-Board-support has been mainly tested with "arduino". More testing for "raspi-io" will follow. The "etherport" and
+Board-support has been tested with "arduino", "raspi-io", "etherport" and "expander" board types. The 
 "particle-io" support is highly experimental at the moment.
 
 ## Getting Started
@@ -99,6 +99,7 @@ Supported `boardTypes`
   [Particle Photon](http://johnny-five.io/platform-support/#particle-photon) and
   [Sparkfun Photon RedBoard](http://johnny-five.io/platform-support/#sparkfun-photon-redboard)
 * "etherport" - experimental, works for Arduinos with ethernet or wifi shields, a software relay to integrate a remote Raspberry will be provided soon.
+* "expander" - see supported controller typeds below
 
 Supported Expander `controller` types:
 
