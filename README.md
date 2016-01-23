@@ -30,6 +30,18 @@ Board-support has been tested with "arduino", "raspi-io", "etherport" and "expan
 
 This section is still work in progress.
 
+**Important Note**: Due to an [node-gyp issue with raspi-io](https://github.com/nebrius/raspi-io/issues/40) the package will not build properly when installed as
+root which is the default when you install plugin via the mobile frontend. As a work-around, please open a shell, 
+remove the package and install again using an unprivileged user.
+
+    # Login as user "pi"
+    sudo service pimatic stop
+    cd /home/pi/pimatic-app/node_modules/
+    sudo rm -rf pimatic-johnny-five
+    npm i pimatic-johnny-five
+    sudo service pimatic start
+
+
 ### Platform Support
 
 The plugin currently supports Arduino, Raspberry Pi boards, and tethering. More boards can be
@@ -58,7 +70,7 @@ connected via USB on ttyUSB1 and an Expander connected to the Arduino:
           "id": "1",
           "boardType": "arduino",
           "port": "/dev/ttyUSB1",
-          "xbaudrate": 57600
+          "baudrate": 57600
         },
         {
           "id": "2",

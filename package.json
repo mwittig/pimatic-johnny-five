@@ -41,14 +41,14 @@
   "dependencies": {
     "etherport": "git+https://github.com/mwittig/etherport.git",
     "firmata": "^0.8.0",
-    "johnny-five": "^0.9.18",
+    "johnny-five": "git+https://github.com/mwittig/johnny-five.git",
     "oled-font-5x7": "^1.0.0",
     "oled-js": "^4.0.1",
     "pimatic-plugin-commons": "^0.8.6"
   },
   "optionalDependencies": {
     "particle-io": "^0.12.0",
-    "raspi-io": "^5.1.0",
+    "raspi-io": "^5.2.0",
     "serialport": "^2.0.5"
   },
   "peerDependencies": {

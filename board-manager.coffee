@@ -120,7 +120,8 @@ module.exports = (env) ->
         for boardConfig in @config.boards
           if boardConfig.id?
             try
-              @boards[boardConfig.id] = @createBoard(_.assign {debug: @debug, repl: false}, boardConfig)
+              @boards[boardConfig.id] = @createBoard(_.assign {debug: @debug, repl: false, timeout: 40000}, boardConfig)
+              @_base.debug "Created board #{boardConfig.id}"
             catch e
               @_base.error "Creation of board #{boardConfig.id} raised exception:" + e
           else
