@@ -152,7 +152,7 @@ the address of the output `pin`. The device is mapped to a [JF "digital output" 
           "id": "jf-do-1",
           "class": "JohnnyFiveSwitch",
           "name": "Digital Output (pin 13)"
-          "pin": 13,
+          "pin": "13",
           "boardId": "1"
     }
 
