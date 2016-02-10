@@ -4,10 +4,14 @@
 ![Logo](https://github.com/mwittig/pimatic-johnny-five/raw/master/assets/images/johnny-five-icon.png)
 
 Pimatic Plugin for [Johnny Five](http://johnny-five.io), a Robotics and IoT programming framework. Thanks to
-Johnny Five, you can easily integrate a wide range of sensors and actuators attached to an Arduino board or your
-Raspberry Pi. On Arduino, the universal Firmata library is used which implements a protocol for the communication with
-host computer. Thus, there is no need to modify the Arduino sketch when new sensors or actuators are connected to your
-Arduino. Johnny Five also supports a variety of [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) and
+Johnny Five, you can easily integrate a wide range of sensors and actuators attached to an Arduino board, a Photon 
+board, or your Raspberry Pi. Generally, it is possible to use multiple boards at the same which may be local boards, 
+i.e. the host runninging pimatic or a board attached via USB to the pimatic host, or remote boards connected via LAN, 
+WiFi or some proxy device on the local network.
+
+For Arduino, the universal Firmata library is used which implements a protocol for the 
+communication with host computer. Thus, there is no need to modify the Arduino sketch when new sensors or actuators 
+are connected to your Arduino. Johnny Five also supports a variety of [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) and
 [1-Wire](https://en.wikipedia.org/wiki/1-Wire) devices.
 
 ## Status of implementation
@@ -23,16 +27,15 @@ This version supports the following devices
 The OLED and LCD display devices are incomplete and, thus, should not be used.
 They won't do anything useful anyway.
 
-Board-support has been tested with "arduino", "raspi-io", "etherport" and "expander" board types. The 
-"particle-io" support is highly experimental at the moment.
+Board-support has been tested with "arduino", "raspi-io", "particle-io", "etherport" and "expander" board types.
 
 ## Getting Started
 
 This section is still work in progress.
 
-**Important Note**: Due to an [node-gyp issue with raspi-io](https://github.com/nebrius/raspi-io/issues/40) the package will not build properly when installed as
-root which is the default when you install plugin via the mobile frontend. As a work-around, please open a shell, 
-remove the package and install again using an unprivileged user.
+**Important Note**: Due to an [node-gyp issue with raspi-io](https://github.com/nebrius/raspi-io/issues/40) the package
+will not build properly when installed as root which is the default when you install plugin via the mobile frontend. 
+As a work-around, please open a shell, remove the package and install again using an unprivileged user.
 
     # Login as user "pi"
     sudo service pimatic stop
@@ -107,7 +110,7 @@ The configuration for a board is an object comprising the following properties.
 Supported `boardTypes`
 * "arduino" - see [Platform Support](http://johnny-five.io/platform-support/)
 * "raspi-io" - works with all Raspberry Pi models (Zero has not been tested yet)
-* "particle-io" - experimental, should work for
+* "particle-io" - known to work for
   [Particle Photon](http://johnny-five.io/platform-support/#particle-photon) and
   [Sparkfun Photon RedBoard](http://johnny-five.io/platform-support/#sparkfun-photon-redboard)
 * "etherport" - experimental, works for Arduinos with ethernet or wifi shields, a software relay to integrate a remote Raspberry will be provided soon.
@@ -358,6 +361,6 @@ The 'johnny-five-icon' files have been created with [Inkscape](https://inkscape.
 by [Mike Sgier](http://msgierillustration.com/) published as part of the Johnny Five project.
 
 Copyright (c) 2012, 2013, 2014 Rick Waldron <waldron.rick@gmail.com>
-Copyright (c) 2014, 2015 The Johnny-Five Authors
+Copyright (c) 2014, 2015, 2016 The Johnny-Five Authors
 
 MIT-License: https://github.com/rwaldron/johnny-five/blob/master/LICENSE-MIT
