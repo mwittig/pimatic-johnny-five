@@ -142,9 +142,10 @@ module.exports = (env) ->
           raspi = require 'raspi-io'
           @board = new BoardWrapper(_.assign(options, {io: new raspi()}))
         )
-        when 'spark-io' then (
-          spark = require 'spark-io'
-          @board = new BoardWrapper(_.assign(options, {io: new spark()}))
+        when 'particle-io' then (
+          Particle = require 'particle-io'
+          @board = new BoardWrapper(_.assign(options, {io: new Particle({
+            token: options.token, deviceId: options.deviceId })}))
         )
         when 'etherport' then (
           EtherPort = require 'etherport'
