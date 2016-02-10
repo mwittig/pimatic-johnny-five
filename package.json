@@ -20,7 +20,7 @@
     "Johnny Five",
     "Pimatic"
   ],
-  "version": "0.8.6",
+  "version": "0.8.7",
   "homepage": "https://github.com/mwittig/pimatic-johnny-five/tree/master",
   "private": false,
   "repository": {
@@ -38,6 +38,9 @@
     }
   ],
   "configSchema": "johnny-five-config-schema.coffee",
+  "config": {
+    "unsafe-perm": true
+  },
   "dependencies": {
     "etherport": "git+https://github.com/mwittig/etherport.git",
     "firmata": "^0.8.0",
