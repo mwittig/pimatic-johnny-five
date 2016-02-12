@@ -154,7 +154,7 @@ the address of the output `pin`. The device is mapped to a [JF "digital output" 
     {
           "id": "jf-do-1",
           "class": "JohnnyFiveSwitch",
-          "name": "Digital Output (pin 13)"
+          "name": "Digital Output (pin 13)",
           "pin": "13",
           "boardId": "1"
     }
@@ -186,7 +186,7 @@ to provide the address of the input `pin` and the `boardId`.
     {
           "id": "jf-cs-1",
           "class": "JohnnyFiveContactSensor",
-          "name": "Digital Input (pin 4)"
+          "name": "Digital Input (pin 4)",
           "pin": "4",
           "boardId": "1"
     }
@@ -218,7 +218,7 @@ to provide the address of the input `pin`.
     {
           "id": "jf-cs-1",
           "class": "JohnnyFiveContactSensor",
-          "name": "Digital Input (pin 4)"
+          "name": "Digital Input (pin 4)",
           "pin": "4",
           "boardId": "1"
     }
@@ -250,7 +250,7 @@ to provide the address of the input `pin`.
     {
           "id": "jf-b-1",
           "class": "JohnnyFiveButton",
-          "name": "Button (pin 2)"
+          "name": "Button (pin 2)",
           "pin": "2",
           "boardId": "1"
     }
