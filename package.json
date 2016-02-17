@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "etherport": "git+https://github.com/mwittig/etherport.git",
-    "firmata": "^0.8.0",
+    "firmata": "^0.8.3",
     "johnny-five": "git+https://github.com/mwittig/johnny-five.git",
     "oled-font-5x7": "^1.0.0",
     "oled-js": "^4.0.1",
