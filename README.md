@@ -114,7 +114,7 @@ Supported `boardTypes`
   [Particle Photon](http://johnny-five.io/platform-support/#particle-photon) and
   [Sparkfun Photon RedBoard](http://johnny-five.io/platform-support/#sparkfun-photon-redboard)
 * "etherport" - experimental, works for Arduinos with ethernet or wifi shields, a software relay to integrate a remote Raspberry will be provided soon.
-* "expander" - see supported controller typeds below
+* "expander" - see supported controller types below
 
 Supported Expander `controller` types:
 
