@@ -355,6 +355,17 @@ For wiring examples, see:
     for the thermistor.
 * [Temperature MPU6050](http://johnny-five.io/examples/temperature-mpu6050/)
 
+## Release History
+
+* Version 0.8.8, 05/03/2016: Dependency updates. Now includes support for Raspberry Pi 3. Fixed some typos.
+* Version 0.8.7, 10/02/2016: Fixed initialization for "particle-io" boards, issue #3 - thanks @hoodpablo, Updated README, Fixed switch example - thanks @Hr-FS
+* Version 0.8.6, 23/01/2016: Updated dependency on "raspi-io" to include support for enabling pull up resistors by writing HIGH to the pin while in INPUT mode, Tweaked johnny-five to allow for longer board initialization timeouts to provide for slow initialization of some Arduinos, Added note to README about installation issue
+* Version 0.8.5, 21/01/2016: Added support for Expander boards, Improved support for setup of remote boards, Improved robustness and error handling. 
+* Version 0.8.4, 12/01/2016: Fixed dependency on etherport fork, thanks to @rubenoost7
+* Version 0.8.3, 29/12/2015: Added board config option to set baudrate. Bug fixture
+* Version 0.8.2, 28/12/2015: Bug fixture
+* Version 0.8.1, 28/12/2015: Added experimental support for Photon boards.
+
 ## Credits
 
 The 'johnny-five-icon' files have been created with [Inkscape](https://inkscape.org) using artwork
