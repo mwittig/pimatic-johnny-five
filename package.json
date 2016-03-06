@@ -1,6 +1,6 @@
 {
   "name": "pimatic-johnny-five",
-  "description": "Pimatic Plugin which provides various johnny-fiveing functions for sensor data",
+  "description": "Pimatic Plugin for Johnny Five, a Robotics and IoT programming framework.",
   "author": {
     "name": "Marcus Wittig",
     "url": "https://github.com/mwittig"
