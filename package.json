@@ -6,6 +6,7 @@
     "url": "https://github.com/mwittig"
   },
   "main": "johnny-five",
+  "icon": "assets/images/johnny-five-icon.svg",
   "files": [
     "johnny-five.coffee",
     "johnny-five-config-schema.coffee",
