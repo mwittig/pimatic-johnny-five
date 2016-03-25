@@ -47,7 +47,7 @@
     "johnny-five": "git+https://github.com/mwittig/johnny-five.git",
     "oled-font-5x7": "^1.0.0",
     "oled-js": "^4.0.1",
-    "pimatic-plugin-commons": "^0.8.7"
+    "pimatic-plugin-commons": "^0.8.8"
   },
   "optionalDependencies": {
     "particle-io": "^0.12.0",
