@@ -4,15 +4,21 @@
 ![Logo](https://github.com/mwittig/pimatic-johnny-five/raw/master/assets/images/johnny-five-icon.png)
 
 Pimatic Plugin for [Johnny Five](http://johnny-five.io), a Robotics and IoT programming framework. Thanks to
-Johnny Five, you can easily integrate a wide range of sensors and actuators attached to an Arduino board, a Photon 
-board, or your Raspberry Pi. Generally, it is possible to use multiple boards at the same which may be local boards, 
-i.e. the host runninging pimatic or a board attached via USB to the pimatic host, or remote boards connected via LAN, 
+Johnny Five, you can easily integrate a wide range of sensors and actuators attached to 
+* an Arduino board, 
+* an ESP8266 board, 
+* a Photon board, or
+* your Raspberry Pi. Generally, it is possible to use multiple boards at the same time which may be local boards, 
+i.e. the host running pimatic or a board attached via USB to the pimatic host, or remote boards connected via LAN, 
 WiFi or some proxy device on the local network.
 
 For Arduino, the universal Firmata library is used which implements a protocol for the 
 communication with host computer. Thus, there is no need to modify the Arduino sketch when new sensors or actuators 
 are connected to your Arduino. Johnny Five also supports a variety of [I2C](https://en.wikipedia.org/wiki/I%C2%B2C) and
 [1-Wire](https://en.wikipedia.org/wiki/1-Wire) devices.
+
+Support for ESP8266 is experimental at the moment as it requires the 
+["esp" development branch](https://github.com/firmata/arduino/tree/esp) of Firmata. 
 
 ## Status of implementation
 
@@ -28,6 +34,7 @@ The OLED and LCD display devices are incomplete and, thus, should not be used.
 They won't do anything useful anyway.
 
 Board-support has been tested with "arduino", "raspi-io", "particle-io", "etherport" and "expander" board types.
+Support for "etherport-client" and "esp8266" is experimental. 
 
 ## Getting Started
 
@@ -104,8 +111,8 @@ The configuration for a board is an object comprising the following properties.
 | port      | -         | String  | Path or name of device port                 |
 | token     | -         | String  | Particle token. Only required for particle-io board type |
 | deviceId  | -         | String  | Particle device id. Only required for particle-io board type |
-| controller  | -       | String  | Expander controller type (see below). Only required for expander board type |
-| address   | -         | String  | Expander I2C address (see below). Only used for expander board type |
+| controller | -        | String  | Expander controller type (see below). Only required for expander board type |
+| address   | -         | String  | Expander I2C address for expander board type or IP address/hostname for esp8266 or etherport-client board type |
 
 Supported `boardTypes`
 * "arduino" - see [Platform Support](http://johnny-five.io/platform-support/)
@@ -113,8 +120,10 @@ Supported `boardTypes`
 * "particle-io" - known to work for
   [Particle Photon](http://johnny-five.io/platform-support/#particle-photon) and
   [Sparkfun Photon RedBoard](http://johnny-five.io/platform-support/#sparkfun-photon-redboard)
-* "etherport" - experimental, works for Arduinos with ethernet or wifi shields, a software relay to integrate a remote Raspberry will be provided soon.
+* "etherport" - works for Arduinos with ethernet or wifi shields, a software relay to integrate a remote Raspberry will be provided soon.
 * "expander" - see supported controller types below
+* "esp8266" and "etherport-client" - works for remote boards like ESP6266 which provide a listener socket pimatic needs 
+  to connect to
 
 Supported Expander `controller` types:
 
@@ -128,7 +137,7 @@ Supported Expander `controller` types:
 * "MUXSHIELD2"
 * "GROVEPI"
 
-The `address`needs only to be set if an I2C address other than the default
+The `address` needs only to be set if an I2C address other than the default
 address is used.
 
 | Controller | Address Range | Default |
@@ -357,6 +366,7 @@ For wiring examples, see:
 
 ## Release History
 
+* Version 0.8.9, 06/04/2016: Added ESP-8266 board support (experimental). Pimatic 0.9 compatibility changes. Dependency updates.
 * Version 0.8.8, 05/03/2016: Dependency updates. Now includes support for Raspberry Pi 3. Fixed some typos.
 * Version 0.8.7, 10/02/2016: Fixed initialization for "particle-io" boards, issue #3 - thanks @hoodpablo, Updated README, Fixed switch example - thanks @Hr-FS
 * Version 0.8.6, 23/01/2016: Updated dependency on "raspi-io" to include support for enabling pull up resistors by writing HIGH to the pin while in INPUT mode, Tweaked johnny-five to allow for longer board initialization timeouts to provide for slow initialization of some Arduinos, Added note to README about installation issue
