@@ -1,7 +1,6 @@
 module.exports = (env) ->
 
   Promise = env.require 'bluebird'
-  _ = env.require 'lodash'
   five = require('johnny-five')
   commons = require('pimatic-plugin-commons')(env)
 
@@ -14,24 +13,24 @@ module.exports = (env) ->
     # @param [JohnnyFivePlugin] plugin   plugin instance
     # @param [Object] lastState state information stored in database
     constructor: (@config, @plugin, lastState) ->
-      @id = config.id
-      @name = config.name
+      @id = @config.id
+      @name = @config.name
       @debug = @plugin.config.debug || false
       @_contact = false
-      @_base = commons.base @, config.class
-      @board = plugin.boardManager.getBoard(config.boardId)
+      @_base = commons.base @, @config.class
+      @board = @plugin.boardManager.getBoard(@config.boardId)
       super()
 
-      @_base.setAttribute("contact", if config.pullUp then true else false)
+      @_base.setAttribute("contact", if @config.pullUp then true else false)
       @board.boardReady()
         .then( (board)=>
           try
             @button = new five.Button {
-              pin: config.pin
-              pullup: config.pullUp || false
-              invert: config.invert || false
-              holdtime: config.holdTime || 500
-              controller: config.controller || undefined
+              pin: @config.pin
+              pullup: @config.pullUp || false
+              invert: @config.invert || false
+              holdtime: @config.holdTime || 500
+              controller: @config.controller || undefined
               board: board
             }
           catch error

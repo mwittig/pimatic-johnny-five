@@ -1,7 +1,6 @@
 module.exports = (env) ->
 
   Promise = env.require 'bluebird'
-  _ = env.require 'lodash'
   five = require('johnny-five')
   commons = require('pimatic-plugin-commons')(env)
   
@@ -14,19 +13,19 @@ module.exports = (env) ->
     # @param [JohnnyFivePlugin] plugin   plugin instance
     # @param [Object] lastState state information stored in database
     constructor: (@config, @plugin, lastState) ->
-      @id = config.id
-      @name = config.name
+      @id = @config.id
+      @name = @config.name
       @debug = @plugin.config.debug || false
-      @_invert = config.invert || false
+      @_invert = @config.invert || false
       @_contact = @_invert
-      @_base = commons.base @, config.class
-      @boardHandle = plugin.boardManager.getBoard(config.boardId)
+      @_base = commons.base @, @config.class
+      @boardHandle = @plugin.boardManager.getBoard(@config.boardId)
       super()
 
       @boardHandle.boardReady()
       .then (board)=>
         @pin = new five.Pin {
-          pin: config.pin
+          pin: @config.pin
           type: "digital"
           mode: 0
           board: board

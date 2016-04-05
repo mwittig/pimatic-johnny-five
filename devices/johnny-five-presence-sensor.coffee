@@ -14,19 +14,19 @@ module.exports = (env) ->
     # @param [JohnnyFivePlugin] plugin   plugin instance
     # @param [Object] lastState state information stored in database
     constructor: (@config, @plugin, lastState) ->
-      @id = config.id
-      @name = config.name
+      @id = @config.id
+      @name = @config.name
       @debug = @plugin.config.debug || false
-      @_invert = config.invert || false
+      @_invert = @config.invert || false
       @_presence = @_invert
-      @_base = commons.base @, config.class
-      @board = plugin.boardManager.getBoard(config.boardId)
+      @_base = commons.base @, @config.class
+      @board = @plugin.boardManager.getBoard(@config.boardId)
       super()
 
       @board.boardReady()
       .then (board)=>
         @pin = new five.Pin {
-          pin: config.pin
+          pin: @config.pin
           type: "digital"
           mode: 0
           board: board

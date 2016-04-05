@@ -16,23 +16,23 @@ module.exports = (env) ->
     # @param [Object] config    device configuration
     # @param [JohnnyFivePlugin] plugin   plugin instance
     # @param [Object] lastState state information stored in database
-    constructor: (@config, plugin, lastState) ->
-      @id = config.id
-      @name = config.name
-      @rows = config.rows || 2
-      @cols = config.cols || 16
+    constructor: (@config, @plugin, lastState) ->
+      @id = @config.id
+      @name = @config.name
+      @rows = @config.rows || 2
+      @cols = @config.cols || 16
       @debug = @plugin.config.debug || false
-      @_base = commons.base @, config.class
+      @_base = commons.base @, @config.class
 
       oledOptions =
         width: 128
         height: 64
-      if config.address? and config.address isnt ""
-        oledOptions.address = config.address
-#      if config.slavePin? and config.slavePin isnt ""
-#        oledOptions.slavePin = config.slavePin
+      if @config.address? and @config.address isnt ""
+        oledOptions.address = @config.address
+#      if @config.slavePin? and @config.slavePin isnt ""
+#        oledOptions.slavePin = @config.slavePin
       @_base.debug "Oled config", oledOptions
-      @board = plugin.boardManager.getBoard(config.boardId)
+      @board = @plugin.boardManager.getBoard(@config.boardId)
       super()
 
       @board.boardReady()

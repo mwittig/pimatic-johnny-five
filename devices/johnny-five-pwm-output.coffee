@@ -14,19 +14,19 @@ module.exports = (env) ->
     # @param [JohnnyFivePlugin] plugin   plugin instance
     # @param [Object] lastState state information stored in database
     constructor: (@config, @plugin, lastState) ->
-      @id = config.id
-      @name = config.name
+      @id = @config.id
+      @name = @config.name
       @debug = @plugin.config.debug || false
       @_dimlevel = 0
       @_state = off
-      @_base = commons.base @, config.class
-      @boardHandle = plugin.boardManager.getBoard(config.boardId)
+      @_base = commons.base @, @config.class
+      @boardHandle = @plugin.boardManager.getBoard(@config.boardId)
       super()
 
       @boardHandle.boardReady()
         .then( (board)=>
           @pin = new five.Led {
-            pin: config.pin
+            pin: @config.pin
             board: board
           }
           @changeDimlevelTo(lastState?.dimlevel?.value or 0)

@@ -14,20 +14,20 @@ module.exports = (env) ->
     # @param [JohnnyFivePlugin] plugin   plugin instance
     # @param [Object] lastState state information stored in database
     constructor: (@config, @plugin, lastState) ->
-      @id = config.id
-      @name = config.name
+      @id = @config.id
+      @name = @config.name
       @debug = @plugin.config.debug || false
-      @_base = commons.base @, config.class
+      @_base = commons.base @, @config.class
       @_temperature = lastState?.temperature?.value or null
-      @_offset = config.offset || 0
+      @_offset = @config.offset || 0
       @_temperatureKey = "celsius"
-      if config.units is "imperial"
+      if @config.units is "imperial"
         @attributes["temperature"].unit = '°F'
         @_temperatureKey = "fahrenheit"
-      else if config.units is "standard"
+      else if @config.units is "standard"
         @attributes["temperature"].unit = 'K'
         @_temperatureKey = "kelvin"
-      @boardHandle = plugin.boardManager.getBoard(config.boardId)
+      @boardHandle = @plugin.boardManager.getBoard(@config.boardId)
       super()
 
       @boardHandle.boardReady()
@@ -35,10 +35,10 @@ module.exports = (env) ->
           address = if address then parseInt(address) else undefined
           try
             @thermometer = new five.Thermometer {
-              pin: config.pin || undefined
+              pin: @config.pin || undefined
               address: address
-              freq: 1000 * (config.interval || 10)
-              controller: config.controller || 'ANALOG'
+              freq: 1000 * (@config.interval || 10)
+              controller: @config.controller || 'ANALOG'
               board: board
             }
           catch error
