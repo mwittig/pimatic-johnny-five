@@ -152,6 +152,15 @@ module.exports = (env) ->
           @board = new BoardWrapper(_.assign(options, {port: new EtherPort({
             port: options.port, reset: options.port || false})}))
         )
+        when 'etherport-client', 'esp8266' then (
+          EtherPortClient = require('etherport-client').EtherPortClient
+          @board = new BoardWrapper(_.assign(options, {
+            port: new EtherPortClient({
+              port: options.port,
+              host: options.address
+            })
+          }))
+        )
         when 'expander' then (
           parentBoard =  @getBoard options.port
           @board = new ExpanderBoardMapper(_.assign(options, {board: parentBoard}))
