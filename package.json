@@ -45,7 +45,7 @@
   "dependencies": {
     "etherport": "git+https://github.com/mwittig/etherport.git",
     "etherport-client": "^0.1.0",
-    "johnny-five": "^0.9.39",
+    "johnny-five": "^0.9.40",
     "oled-font-5x7": "^1.0.0",
     "oled-js": "^4.0.1",
     "pimatic-plugin-commons": "^0.8.8"
