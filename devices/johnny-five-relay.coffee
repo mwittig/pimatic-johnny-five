@@ -35,6 +35,10 @@ module.exports = (env) ->
       )
 
 
+    destroy: () ->
+      super()
+
+
     _queryState: () ->
       return new Promise( (resolve, reject) =>
         @boardHandle.boardReady()

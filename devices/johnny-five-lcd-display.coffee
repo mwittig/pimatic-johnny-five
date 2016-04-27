@@ -18,3 +18,6 @@ module.exports = (env) ->
       @_base = commons.base @, @config.class
       super()
 
+
+    destroy: () ->
+      super()

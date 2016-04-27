@@ -44,6 +44,10 @@ module.exports = (env) ->
         @_base.rejectWithError null, error
 
 
+    destroy: () ->
+      super()
+
+
     getPresence: () ->
       return new Promise( (resolve, reject) =>
         @board.boardReady()

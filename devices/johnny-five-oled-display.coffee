@@ -51,3 +51,7 @@ module.exports = (env) ->
       .catch ((error) =>
         @_base.rejectWithError null, error
       )
+
+
+    destroy: () ->
+      super()

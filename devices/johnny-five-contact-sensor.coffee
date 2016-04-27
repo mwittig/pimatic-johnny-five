@@ -42,6 +42,10 @@ module.exports = (env) ->
         @_base.rejectWithError null, error
 
 
+    destroy: () ->
+      super()
+
+
     getContact: () ->
       return new Promise( (resolve, reject) =>
         @boardHandle.boardReady()
