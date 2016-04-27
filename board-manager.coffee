@@ -134,7 +134,8 @@ module.exports = (env) ->
       switch options.boardType || 'arduino'
         when 'arduino' then (
           if options.port? and options.baudrate?
-            SerialPort = require('serialport').SerialPort
+            fiveModule = require.cache[require.resolve 'johnny-five']
+            SerialPort = fiveModule.require('serialport').SerialPort;
             options.port = new SerialPort(options.port, {baudrate: options.baudrate})
           @board = new BoardWrapper options
         )
