@@ -25,7 +25,7 @@ module.exports = (env) ->
 
       @boardHandle.boardReady()
         .then (board)=>
-          @_base.debug "initializing digital output pin #{config.pin}"
+          @_base.debug "initializing digital output pin #{@config.pin}"
           @pin = new five.Pin {
             pin: @config.pin
             type: "digital"
