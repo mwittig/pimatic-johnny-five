@@ -39,7 +39,7 @@ module.exports = {
             type: "string"
             required: false
           address:
-            description: "Expander I2C address. Only used for expander board type"
+            description: "Expander I2C address or IP address/hostname. Only used for expander and etherport-client board type"
             type: "string"
             required: false
 }
