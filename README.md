@@ -40,17 +40,9 @@ Support for "etherport-client" and "esp8266" is experimental.
 
 This section is still work in progress.
 
-**Important Note**: Due to an [node-gyp issue with raspi-io](https://github.com/nebrius/raspi-io/issues/40) the package
+~~**Important Note**: Due to an [node-gyp issue with raspi-io](https://github.com/nebrius/raspi-io/issues/40) the package
 will not build properly when installed as root which is the default when you install plugin via the mobile frontend. 
-As a work-around, please open a shell, remove the package and install again using an unprivileged user.
-
-    # Login as user "pi"
-    sudo service pimatic stop
-    cd /home/pi/pimatic-app/node_modules/
-    sudo rm -rf pimatic-johnny-five
-    npm i pimatic-johnny-five
-    sudo service pimatic start
-
+As a work-around, please open a shell, remove the package and install again using an unprivileged user.~~ (solved with pimatic@0.8.107)
 
 ### Platform Support
 
