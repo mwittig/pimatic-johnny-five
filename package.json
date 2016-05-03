@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "etherport": "git+https://github.com/mwittig/etherport.git",
-    "etherport-client": "^0.1.0",
+    "etherport-client": "^0.1.1",
     "johnny-five": "^0.9.44",
     "oled-font-5x7": "^1.0.0",
     "oled-js": "^4.0.1",
