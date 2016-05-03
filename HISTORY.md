@@ -1,5 +1,8 @@
 # Release History
 
+* 20160503, V0.9.1 (beta)
+    * Dependency updates
+    
 * 20160427, V0.9.0 (beta)
     * Added ESP-8266 board support (experimental)
     * Pimatic 0.9 compatibility changes
