@@ -1,10 +1,14 @@
 
 # pimatic-johnny-five
 
+[![npm version](https://badge.fury.io/js/pimatic-johnny-five.svg)](http://badge.fury.io/js/pimatic-johnny-five)
+[![Build Status](https://travis-ci.org/mwittig/pimatic-johnny-five.svg?branch=master)](https://travis-ci.org/mwittig/pimatic-johnny-five)
+
+Pimatic Plugin for [Johnny Five](http://johnny-five.io), a Robotics and IoT programming framework. 
+
 ![Logo](https://github.com/mwittig/pimatic-johnny-five/raw/master/assets/images/johnny-five-icon.png)
 
-Pimatic Plugin for [Johnny Five](http://johnny-five.io), a Robotics and IoT programming framework. Thanks to
-Johnny Five, you can easily integrate a wide range of sensors and actuators attached to 
+Thanks to Johnny Five, you can easily integrate a wide range of sensors and actuators attached to 
 * an Arduino board, 
 * an ESP8266 board, 
 * a Photon board, or
