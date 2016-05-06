@@ -1,5 +1,9 @@
 # Release History
 
+* 20160506, V0.9.2 (beta)
+    * Dependency updates
+    * Added badges and travis build descriptor
+    
 * 20160503, V0.9.1 (beta)
     * Dependency updates
     
