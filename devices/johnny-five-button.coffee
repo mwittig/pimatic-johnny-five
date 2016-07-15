@@ -21,7 +21,7 @@ module.exports = (env) ->
       @board = @plugin.boardManager.getBoard(@config.boardId)
       super()
 
-      @_base.setAttribute("contact", if @config.pullUp then true else false)
+      @_setContact(if @config.pullUp then true else false)
       @board.boardReady()
         .then( (board)=>
           try
@@ -38,14 +38,14 @@ module.exports = (env) ->
 
           @button.on("hold", =>
             @_base.debug "#{@id} pin #{@config.pin} HOLD"
-            @_base.setAttribute("contact", true)
+            @_setContact(true)
           )
           @button.on("press", =>
             @_base.debug "#{@id} pin #{@config.pin} PRESS"
           )
           @button.on("release", =>
             @_base.debug "#{@id} pin #{@config.pin} RELEASE"
-            @_base.setAttribute("contact", false)
+            @_setContact(false)
           )
         )
         .catch (error) =>
