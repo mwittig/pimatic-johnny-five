@@ -66,9 +66,7 @@ module.exports = (env) ->
             @_base.debug "temperature (raw): #{temperature} #{@_temperatureKey} (offset) #{@_temperatureOffset}"
             @_base.debug "pressure (raw): #{pressure} (offset) #{@_pressureOffset}"
             @_setTemperature temperature + @_temperatureOffset
-            @emit "temperature", temperature + @_temperatureOffset
             @_base.setAttribute "pressure", pressure * 10 + @_pressureOffset
-            @emit "pressure", pressure * 10 + @_pressureOffset
           )
         )
         .catch (error) =>
