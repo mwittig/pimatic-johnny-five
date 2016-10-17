@@ -176,7 +176,11 @@ module.exports = {
       controller:
         description: "Controller interface type to be used, one of MS5611"
         type: "string"
-        default: "ANALOG"
+        default: "MS5611"
+      address:
+        description: "The I2C address. Default 0x77"
+        type: "string"
+        default: "0x77"
       pin:
         description: "The pin address. Required if controller is ANALOG, optional otherwise"
         type: "string"
