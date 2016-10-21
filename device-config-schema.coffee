@@ -166,6 +166,48 @@ module.exports = {
         description: "A positive or negative offset value to adjust a deviation of the humidity sensor"
         type: "number"
         default: 0
+  },
+  JohnnyFiveTemperaturePressure: {
+    title: "Johnny Five Temperature & Pressure"
+    description: "Johnny Five Temperature & Pressure"
+    type: "object"
+    extensions: ["xLink", "xAttributeOptions"]
+    properties:
+      controller:
+        description: "Controller interface type to be used, one of MS5611"
+        type: "string"
+        default: "MS5611"
+      address:
+        description: "The I2C address. Default 0x77"
+        type: "string"
+        default: "0x77"
+      pin:
+        description: "The pin address. Required if controller is ANALOG, optional otherwise"
+        type: "string"
+        default: ""
+      boardId:
+        description: "Id of the board to be used"
+        type: "string"
+      interval:
+        description: "The time interval in seconds at which the sensor will be read"
+        type: "number"
+        default: 10
+      units:
+        description: "Defines whether metric, imperial, or standard units shall be used"
+        format: "string"
+        default: "metric"
+      temperatureOffset:
+        description: "A positive or negative offset value to adjust a deviation of the temperature sensor"
+        type: "number"
+        default: 0
+      pressureOffset:
+        description: "A positive or negative offset value to adjust a deviation of the humidity sensor"
+        type: "number"
+        default: 0
+      elevation:
+        description: "The elevation of the current location in meters"
+        type: "number"
+        default: 0
   }
   JohnnyFiveOledDisplay: {
     title: "JohnnyFive LED"
