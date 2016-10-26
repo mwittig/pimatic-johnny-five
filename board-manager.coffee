@@ -135,7 +135,7 @@ module.exports = (env) ->
         when 'arduino' then (
           if options.port? and options.baudrate?
             fiveModule = require.cache[require.resolve 'johnny-five']
-            SerialPort = fiveModule.require('serialport').SerialPort;
+            SerialPort = fiveModule.require 'serialport'
             options.port = new SerialPort(options.port, {baudrate: options.baudrate})
           @board = new BoardWrapper options
         )
