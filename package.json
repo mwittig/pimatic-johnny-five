@@ -39,6 +39,16 @@
       "url": "https://github.com/mwittig"
     }
   ],
+  "contributors": [
+    {
+      "name": "Ruben Oost",
+      "email": "info@kanedo.net"
+    },
+    {
+      "name": "Gabriel Bretschner",
+      "email": "ruben@oost.io"
+    }
+  ],
   "configSchema": "johnny-five-config-schema.coffee",
   "config": {
     "unsafe-perm": true
