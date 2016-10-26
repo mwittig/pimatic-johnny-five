@@ -44,12 +44,12 @@
     "unsafe-perm": true
   },
   "dependencies": {
-    "etherport": "git+https://github.com/mwittig/etherport.git",
-    "etherport-client": "^0.1.1",
-    "johnny-five": "^0.10.0",
+    "etherport": "git+https://github.com/mwittig/etherport.git#5f3fd5dabf5fc84c8859367d580f45c95fbb7d68",
+    "etherport-client": "^0.1.2",
+    "johnny-five": "^0.10.3",
     "oled-font-5x7": "^1.0.0",
     "oled-js": "^4.0.2",
-    "pimatic-plugin-commons": "^0.9.2"
+    "pimatic-plugin-commons": "^0.9.3"
   },
   "optionalDependencies": {
     "particle-io": "^0.14.0",
