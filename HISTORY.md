@@ -1,5 +1,9 @@
 # Release History
 
+* 20161027, V0.9.4
+    * Dependency updates
+    * Added JohnnyFiveTemperaturePressure device type, thanks @kanedo
+    
 * 20160512, V0.9.3
     * Dependency updates
     * Removed beta tag
