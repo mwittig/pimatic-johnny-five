@@ -33,6 +33,7 @@ This version supports the following devices
 * Relay Switch (relay boards attached to digital output)
 * Temperature Sensor (analog, I2C and 1-Wire)
 * Temperature & Humidity Sensor (analog, I2C - sorry, no 1-Wire support, to date)
+* Temperature & Barometric Pressure Sensor (I2C devices such as BMP180, MPL115A2, MPL3115A2)
 
 The OLED and LCD display devices are incomplete and, thus, should not be used.
 They won't do anything useful anyway.
