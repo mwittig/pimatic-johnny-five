@@ -74,6 +74,7 @@ module.exports = (env) ->
 
     destroy: () ->
       @multi.removeAllListeners 'data' if @multi?
+      @boardHandle.releasePin @config.pin, @config.controller || 'ANALOG'
       delete @multi
       super()
 

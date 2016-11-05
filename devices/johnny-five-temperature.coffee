@@ -54,6 +54,7 @@ module.exports = (env) ->
 
     destroy: () ->
       @thermometer.removeAllListeners 'data' if @thermometer?
+      @boardHandle.releasePin @config.pin, @config.controller || 'ANALOG'
       delete @thermometer
       super()
 
