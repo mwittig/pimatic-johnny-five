@@ -41,13 +41,12 @@ They won't do anything useful anyway.
 Board-support has been tested with "arduino", "raspi-io", "particle-io", "etherport" and "expander" board types.
 Support for "etherport-client" and "esp8266" is experimental. 
 
-## Getting Started
+### Contributions
 
-This section is still work in progress.
+If you like this plugin, please consider &#x2605; starring 
+[the project on github](https://github.com/mwittig/pimatic-johnny-five). Contributions to the project are  welcome. You can simply fork the project and create a pull request with 
+your contribution to start with. 
 
-~~**Important Note**: Due to an [node-gyp issue with raspi-io](https://github.com/nebrius/raspi-io/issues/40) the package
-will not build properly when installed as root which is the default when you install plugin via the mobile frontend. 
-As a work-around, please open a shell, remove the package and install again using an unprivileged user.~~ (solved with pimatic@0.8.107)
 
 ### Platform Support
 
