@@ -31,12 +31,11 @@ module.exports = (env) ->
       super()
 
       @boardHandle.boardReady()
-        .then( (board)=>
-          address = if address then parseInt(address) else undefined
+        .then( (board) =>
           try
             @thermometer = new five.Thermometer {
               pin: @config.pin || undefined
-              address: address
+              address: if not _.isEmpty @config.address then parseInt @config.address else undefined
               freq: 1000 * (@config.interval || 10)
               controller: @config.controller || 'ANALOG'
               board: board
@@ -44,7 +43,7 @@ module.exports = (env) ->
           catch error
             throw error
 
-          @thermometer.on("data", =>
+          @thermometer.on('data', =>
             @_base.debug "temperature (raw): #{@thermometer[@_temperatureKey]} #{@_temperatureKey} (offset) #{@_offset}"
             @_setTemperature @thermometer[@_temperatureKey] + @_offset
           )
@@ -54,6 +53,8 @@ module.exports = (env) ->
 
 
     destroy: () ->
+      @thermometer.removeAllListeners 'data' if @thermometer?
+      delete @thermometer
       super()
 
 

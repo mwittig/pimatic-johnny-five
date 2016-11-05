@@ -48,12 +48,11 @@ module.exports = (env) ->
       @boardHandle.boardReady()
         .then( (board)=>
           try
-            address = if address then parseInt(address) else undefined
             @multi = new five.Multi {
               pin: @config.pin || undefined
-              address: address
+              address: if not _.isEmpty @config.address then parseInt @config.address else undefined
               freq: 1000 * (@config.interval || 10)
-              controller: @config.controller || 'ANALOG'
+              controller: @config.controller || 'MS5611'
               board: board,
               elevation: @_elevation
             }
@@ -74,6 +73,8 @@ module.exports = (env) ->
 
 
     destroy: () ->
+      @multi.removeAllListeners 'data' if @multi?
+      delete @multi
       super()
 
 

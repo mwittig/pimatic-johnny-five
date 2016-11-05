@@ -117,6 +117,13 @@ module.exports = {
         description: "The pin address. Required if controller is ANALOG, optional otherwise"
         type: "string"
         default: ""
+      address:
+        description: """
+          The I2C address. If controller is an I2C device and address is not provided the device-specfic
+          default address applies.
+        """
+        type: "string"
+        default: ""
       boardId:
         description: "Id of the board to be used"
         type: "string"
@@ -145,6 +152,13 @@ module.exports = {
         default: "ANALOG"
       pin:
         description: "The pin address. Required if controller is ANALOG, optional otherwise"
+        type: "string"
+        default: ""
+      address:
+        description: """
+          The I2C address. If controller is an I2C device and address is not provided the device-specfic
+          default address applies.
+        """
         type: "string"
         default: ""
       boardId:
@@ -177,12 +191,15 @@ module.exports = {
         description: "Controller interface type to be used, one of MS5611"
         type: "string"
         default: "MS5611"
-      address:
-        description: "The I2C address. Default 0x77"
-        type: "string"
-        default: "0x77"
       pin:
         description: "The pin address. Required if controller is ANALOG, optional otherwise"
+        type: "string"
+        default: ""
+      address:
+        description: """
+          The I2C address. If controller is an I2C device and address is not provided the device-specfic
+          default address applies.
+        """
         type: "string"
         default: ""
       boardId:

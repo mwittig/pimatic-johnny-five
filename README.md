@@ -347,12 +347,21 @@ The Temperature Sensor has the following configuration properties:
 |:-----------|:------------|:---------|:------------------------------------------------------------------------------|
 | controller | "TINKERKIT" | String   | Controller interface type to be used, one of TINKERKIT, LM35, TMP36, DS18B20, MPU6050, GROVE, BMP180, MPL115A2, MPL3115A2, HTU21D, SI7020 |                                         |
 | pin        | ""          | String   | The pin address. Required if controller is TINKERKIT, optional otherwise |                                         |
+| address    | ""          | String   | If controller is an I2C device and address is not provided the device-specfic default address applies |                                         |
 | boardId    | -           | String   | Id of the board to be used                                                    |
 | interval   | 10          | Number   | The time interval in seconds at which the sensor will be read |
 | units      | "metric"    | String   | Defines whether metric, imperial, or standard units shall be used                                              |
 | offset     | 0           | Number   | A positive or negative offset value to adjust a deviation of the temperature sensor |
 | controller | ""          | String   | Controller interface type if an EVshield is used. Supports 'EVS_EV3' and 'EVS_NXT' shields |
 
+address:
+        description: """
+          The I2C address. If controller is an I2C device and address is not provided the device-specfic
+          default address applies.
+        """
+        type: "string"
+        required: false
+      
 For wiring examples, see:
 * [Temperature TINKERKIT](http://johnny-five.io/examples/tinkerkit-thermistor/)
     * If you don't have the tinkerkit shield, here's a
