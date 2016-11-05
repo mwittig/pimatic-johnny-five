@@ -22,7 +22,7 @@
     "Johnny Five",
     "Pimatic"
   ],
-  "version": "0.9.5",
+  "version": "0.9.6",
   "homepage": "https://github.com/mwittig/pimatic-johnny-five/tree/master",
   "private": false,
   "repository": {
