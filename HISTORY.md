@@ -1,5 +1,9 @@
 # Release History
 
+* 20161105, V0.9.5
+    * fix for invalid I2C address problem, issue 46
+    * Revised README
+    
 * 20161027, V0.9.4
     * Dependency updates
     * Added JohnnyFiveTemperaturePressure device type, thanks @kanedo
