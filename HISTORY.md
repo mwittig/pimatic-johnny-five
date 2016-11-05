@@ -1,5 +1,10 @@
 # Release History
 
+* 20161105, V0.9.6
+    * Fixed handling of i2c address property, issue #47
+    * Remove data listener on destruction of temperature device
+    * Added helper to release pins for analaog sensors on destruction
+    
 * 20161105, V0.9.5
     * fix for invalid I2C address problem, issue 46
     * Revised README
