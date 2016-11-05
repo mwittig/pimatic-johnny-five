@@ -33,7 +33,7 @@ module.exports = (env) ->
         expanderOptions =
           controller: @opts.controller
         if @opts.address?
-          expanderOptions.address = @opts.address
+          expanderOptions.address = parseInt @opts.address
         @virtual = new five.Board.Virtual({
           io:  new five.Expander(expanderOptions),
           board: @opts.board
