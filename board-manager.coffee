@@ -60,6 +60,9 @@ module.exports = (env) ->
           @_base.rejectWithError(reject, error)
       )
 
+    releasePin: (pin, controller) ->
+      # nothing to do
+
 
   class BoardWrapper extends five.Board
     constructor: (opts) ->
@@ -106,6 +109,20 @@ module.exports = (env) ->
         .catch (error) =>
           @_base.rejectWithError(reject, error)
       )
+
+    releasePin: (pin, controller) ->
+      if not _.isEmpty pin
+        checkController = not _.isEmpty controller
+        for index, slot of @occupied
+          if checkController
+            match = slot.controller? and slot.controller is controller
+          else
+            match = true
+
+          if slot.value is pin and slot.type is 'pin' and match
+            @occupied.splice index, 1
+            break
+
 
   class BoardManager extends events.EventEmitter
 
