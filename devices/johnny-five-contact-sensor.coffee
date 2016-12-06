@@ -43,6 +43,10 @@ module.exports = (env) ->
 
 
     destroy: () ->
+      if @pin?
+        @pin.removeAllListeners 'high'
+        @pin.removeAllListeners 'low'
+        delete @pin
       super()
 
 

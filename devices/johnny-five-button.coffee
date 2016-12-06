@@ -52,6 +52,11 @@ module.exports = (env) ->
           @_base.rejectWithError null, error
 
     destroy: () ->
+      if @button?
+        @button.removeAllListeners 'hold'
+        @button.removeAllListeners 'press'
+        @button.removeAllListeners 'release'
+        delete @button
       super()
 
     getContact: () ->
