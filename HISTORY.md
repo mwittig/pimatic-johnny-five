@@ -1,5 +1,9 @@
 # Release History
 
+* 20170115, V0.9.7
+    * Fixed initialization bug for expander board when used with raspi-io, issue #54
+    * Dependency updates
+    
 * 20161105, V0.9.6
     * Fixed handling of i2c address property, issue #47
     * Remove data listener on destruction of temperature device
