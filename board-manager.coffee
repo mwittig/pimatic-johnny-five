@@ -32,6 +32,7 @@ module.exports = (env) ->
         @boardIsReady = true
         expanderOptions =
           controller: @opts.controller
+          board: @opts.board
         if @opts.address?
           expanderOptions.address = parseInt @opts.address
         @virtual = new five.Board.Virtual({
