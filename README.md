@@ -55,6 +55,8 @@ added on request. The Johnny Five project provides a detailed
 [list of supported platforms](https://johnny-five.io/platform-support/) with
 detailed information on supported features and how to set up the board.
 
+
+
 ## Plugin Configuration
 
 You can load the plugin by editing your `config.json` to include the following
@@ -112,7 +114,7 @@ The configuration for a board is an object comprising the following properties.
 
 Supported `boardTypes`
 * "arduino" - see [Platform Support](http://johnny-five.io/platform-support/)
-* "raspi-io" - works with all Raspberry Pi models (Zero has not been tested yet)
+* "raspi-io" - works with all Raspberry Pi models (Zero has not been tested yet). Note, wiringPi must be installed
 * "particle-io" - known to work for
   [Particle Photon](http://johnny-five.io/platform-support/#particle-photon) and
   [Sparkfun Photon RedBoard](http://johnny-five.io/platform-support/#sparkfun-photon-redboard)
