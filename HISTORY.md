@@ -1,5 +1,9 @@
 # Release History
 
+* 20170115, V0.9.8
+    * Improved error handling for the expander board, i.e. handle i2c errors due to misconfiguration
+    * Improved board configuration handling
+
 * 20170115, V0.9.7
     * Fixed initialization bug for expander board when used with raspi-io, issue #54
     * Dependency updates
