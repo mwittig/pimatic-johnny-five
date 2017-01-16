@@ -141,10 +141,14 @@ module.exports = (env) ->
 
       boardConfigs = @config.boards
       if boardConfigs? and boardConfigs.length isnt 0
+        defaultBoardConfig =
+          debug: @debug
+          repl: false
+          timeout: 40000
         for boardConfig in @config.boards
           if boardConfig.id?
             try
-              @boards[boardConfig.id] = @createBoard(_.assign {debug: @debug, repl: false, timeout: 40000}, boardConfig)
+              @boards[boardConfig.id] = @createBoard(_.assign {}, defaultBoardConfig, boardConfig)
               @_base.debug "Created board #{boardConfig.id}"
             catch e
               @_base.error "Creation of board #{boardConfig.id} raised exception:" + e
@@ -165,21 +169,21 @@ module.exports = (env) ->
         )
         when 'raspi-io' then (
           raspi = require 'raspi-io'
-          @board = new BoardWrapper(_.assign(options, {io: new raspi()}))
+          @board = new BoardWrapper(_.assign({}, options, {io: new raspi()}))
         )
         when 'particle-io' then (
           Particle = require 'particle-io'
-          @board = new BoardWrapper(_.assign(options, {io: new Particle({
+          @board = new BoardWrapper(_.assign({}, options, {io: new Particle({
             token: options.token, deviceId: options.deviceId })}))
         )
         when 'etherport' then (
           EtherPort = require 'etherport'
-          @board = new BoardWrapper(_.assign(options, {port: new EtherPort({
+          @board = new BoardWrapper(_.assign({}, options, {port: new EtherPort({
             port: options.port, reset: options.port || false})}))
         )
         when 'etherport-client', 'esp8266' then (
           EtherPortClient = require('etherport-client').EtherPortClient
-          @board = new BoardWrapper(_.assign(options, {
+          @board = new BoardWrapper(_.assign({}, options, {
             port: new EtherPortClient({
               port: options.port,
               host: options.address
@@ -188,7 +192,7 @@ module.exports = (env) ->
         )
         when 'expander' then (
           parentBoard =  @getBoard options.port
-          @board = new ExpanderBoardMapper(_.assign(options, {board: parentBoard}))
+          @board = new ExpanderBoardMapper(_.assign({}, options, {board: parentBoard}))
         )
         else
           throw new Error "Unsupported boardType #{options.boardType}"
