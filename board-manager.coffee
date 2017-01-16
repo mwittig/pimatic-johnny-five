@@ -26,22 +26,28 @@ module.exports = (env) ->
           @opts.board.once "ready", @_boardReadyListener
           @opts.board.once "error", @_boardNotReadyListener
       )
+      .catch (error) =>
+        @_base.error error
 
     _boardReadyHandler: (resolve, reject) ->
       return () =>
-        @boardIsReady = true
         expanderOptions =
           controller: @opts.controller
           board: @opts.board
         if @opts.address?
           expanderOptions.address = parseInt @opts.address
-        @virtual = new five.Board.Virtual({
-          io:  new five.Expander(expanderOptions),
-          board: @opts.board
-        })
+        try
+          @virtual = new five.Board.Virtual({
+            io:  new five.Expander(expanderOptions),
+            board: @opts.board
+          })
+        catch error
+          return reject new Error "Expander board initialization failed: #{error}"
+
         @opts.board.removeListener "error", @_boardNotReadyListener if @_boardNotReadyListener?
         @virtual.remote = false
         @_base.debug "Board Ready"
+        @boardIsReady = true
         resolve @virtual
 
     _boardNotReadyHandler: (resolve, reject) ->
