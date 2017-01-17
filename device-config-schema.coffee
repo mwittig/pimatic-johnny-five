@@ -132,8 +132,9 @@ module.exports = {
         type: "number"
         default: 10
       units:
-        description: "Defines whether metric, imperial, or standard units shall be used"
-        format: "string"
+        description: "Defines whether \"metric\", \"imperial\", or \"standard\" units shall be used"
+        format: "enum"
+        enum: ["metric", "imperial", "standard"]
         default: "metric"
       offset:
         description: "A positive or negative offset value to adjust a deviation of the temperature sensor"
@@ -169,8 +170,9 @@ module.exports = {
         type: "number"
         default: 10
       units:
-        description: "Defines whether metric, imperial, or standard units shall be used"
-        format: "string"
+        description: "Defines whether \"metric\", \"imperial\", or \"standard\" units shall be used"
+        format: "enum"
+        enum: ["metric", "imperial", "standard"]
         default: "metric"
       temperatureOffset:
         description: "A positive or negative offset value to adjust a deviation of the temperature sensor"
@@ -210,8 +212,9 @@ module.exports = {
         type: "number"
         default: 10
       units:
-        description: "Defines whether metric, imperial, or standard units shall be used"
-        format: "string"
+        description: "Defines whether \"metric\", \"imperial\", or \"standard\" units shall be used"
+        format: "enum"
+        enum: ["metric", "imperial", "standard"]
         default: "metric"
       temperatureOffset:
         description: "A positive or negative offset value to adjust a deviation of the temperature sensor"
