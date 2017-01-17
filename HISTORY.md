@@ -1,6 +1,10 @@
 # Release History
 
-* 20170115, V0.9.8
+* 20170117, V0.9.9
+    * Improved device schema for temperature unit properties to editable with device editor
+    * Added debug mode property to enable plugin debugging mode
+    
+* 20170116, V0.9.8
     * Improved error handling for the expander board, i.e. handle i2c errors due to misconfiguration
     * Improved board configuration handling
 
