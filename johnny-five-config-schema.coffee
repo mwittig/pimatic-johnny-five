@@ -42,4 +42,8 @@ module.exports = {
             description: "Expander I2C address or IP address/hostname. Only used for expander and etherport-client board type"
             type: "string"
             required: false
+    debug:
+      description: "Debug mode. Writes debug messages to the pimatic log, if set to true."
+      type: "boolean"
+      default: false
 }
