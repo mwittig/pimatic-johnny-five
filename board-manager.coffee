@@ -169,7 +169,14 @@ module.exports = (env) ->
         )
         when 'raspi-io' then (
           raspi = require 'raspi-io'
-          @board = new BoardWrapper(_.assign({}, options, {io: new raspi()}))
+          raspiOptions =
+            enableSoftPwm: true
+          if options.address?
+            try
+              raspiOptions = _.assign({}, JSON.parse(options.address), raspiOptions)
+            catch e
+              env.logger.error "Property address does not contain stringified JSON options for raspi-io - ignored."
+          @board = new BoardWrapper(_.assign({}, options, {io: new raspi(raspiOptions)}))
         )
         when 'particle-io' then (
           Particle = require 'particle-io'
