@@ -15,11 +15,19 @@ module.exports = (env) ->
     'johnny-five-temperature'
     'johnny-five-temperature-humidity'
     'johnny-five-temperature-pressure'
+    'johnny-five-rgb-led'
   ]
     # convert kebap-case to camel-case notation with first character capitalized
     className = device.replace /(^[a-z])|(\-[a-z])/g, ($1) -> $1.toUpperCase().replace('-','')
     deviceTypes[className] = require('./devices/' + device)(env)
 
+  actionProviders = {}
+  for provider in [
+    'johnny-five-rgb-color-action'
+  ]
+    # convert kebap-case to camel-case notation with first character capitalized
+    className = provider.replace(/(^[a-z])|(\-[a-z])/g, ($1) -> $1.toUpperCase().replace('-','')) + 'Provider'
+    actionProviders[className] = require('./actions/' + provider)(env)
 
   # ###JohnnyFivePlugin class
   class JohnnyFivePlugin extends env.plugins.Plugin
@@ -36,6 +44,10 @@ module.exports = (env) ->
           configDef: deviceConfigDef[className],
           createCallback: @callbackHandler(className, classType)
         })
+
+      for className, classType of actionProviders
+        env.logger.debug "Registering action provider #{className}"
+        @framework.ruleManager.addActionProvider(new classType @framework)
 
     callbackHandler: (className, classType) ->
       # this closure is required to keep the className and classType context as part of the iteration

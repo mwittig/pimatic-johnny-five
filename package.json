@@ -13,6 +13,7 @@
     "device-config-schema.coffee",
     "board-manager.coffee",
     "devices",
+    "actions",
     "assets",
     "LICENSE",
     "HISTORY.md",
@@ -54,6 +55,7 @@
     "unsafe-perm": true
   },
   "dependencies": {
+    "colornames": "^1.1.1",
     "etherport": "git+https://github.com/mwittig/etherport.git#5f3fd5dabf5fc84c8859367d580f45c95fbb7d68",
     "etherport-client": "^0.1.2",
     "johnny-five": "^0.10.6",
@@ -63,7 +65,7 @@
   },
   "optionalDependencies": {
     "particle-io": "^0.14.0",
-    "raspi-io": "^7.2.0"
+    "raspi-io": "^7.2.3"
   },
   "peerDependencies": {
     "pimatic": ">=0.8.0 <1.0.0"

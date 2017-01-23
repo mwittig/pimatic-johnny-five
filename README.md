@@ -34,6 +34,7 @@ This version supports the following devices
 * Temperature Sensor (analog, I2C and 1-Wire)
 * Temperature & Humidity Sensor (analog, I2C - sorry, no 1-Wire support, to date)
 * Temperature & Barometric Pressure Sensor (I2C devices such as BMP180, MPL115A2, MPL3115A2)
+* RGB LED (common cathode/common cathode LEDs and PCA9685, an I2C-bus controlled 16-channel LED controller)
 
 The OLED and LCD display devices are incomplete and, thus, should not be used.
 They won't do anything useful anyway.
@@ -134,24 +135,27 @@ Supported Expander `controller` types:
 * "PCF8591"
 * "MUXSHIELD2"
 * "GROVEPI"
+* "CD74HC4067"
 
 The `address` needs only to be set if an I2C address other than the default
 address is used.
 
-| Controller | Address Range | Default |
-|------------|---------------|--------|
-| "MCP23017" | "0x20"-"0x27" | "0x20" |
-| "MCP23008" | "0x20"-"0x27" | "0x20" |
-| "PCF8574"  | "0x20"-"0x27" | "0x20" |
-| "PCF8574A" | "0x38"-"0x3F" | "0x38" |
-| "PCF8575"  | "0x20"-"0x27" | "0x20" |
-| "PCF8591"  | "0x48"-"0x4F" | "0x48" |
-| "PCA9685"  | "0x40"-"0x4F" | "0x40" |
-| "GROVEPI"  | "0x04"        | "0x04" |
+| Controller   | Address Range | Default |
+|--------------|---------------|--------|
+| "MCP23017"   | "0x20"-"0x27" | "0x20" |
+| "MCP23008"   | "0x20"-"0x27" | "0x20" |
+| "PCF8574"    | "0x20"-"0x27" | "0x20" |
+| "PCF8574A"   | "0x38"-"0x3F" | "0x38" |
+| "PCF8575"    | "0x20"-"0x27" | "0x20" |
+| "PCF8591"    | "0x48"-"0x4F" | "0x48" |
+| "PCA9685"    | "0x40"-"0x4F" | "0x40" |
+| "GROVEPI"    | "0x04"        | "0x04" |
+| "CD74HC4067" | "0x0A"-"0x0D" | "0x0A" |
 
 ## Device Configuration
 
-Devices must be added manually to the device section of your pimatic config.
+Devices must be added manually to the device section of your pimatic config. For pin assignment conventions 
+see the [document on pin naming](https://github.com/mwittig/pimatic-johnny-five/blob/master/assets/docs/pin-naming.md).
 
 ### Switch Device
 
@@ -184,6 +188,87 @@ The following predicates and actions are supported:
 * {device} is turned on|off
 * switch {device} on|off
 * toggle {device}
+
+### PWM Output (Dimmer)
+
+`JohnnyFivePwmOutput` is based on the DimmerActuator device class. You need to provide
+the address of the output `pin`. The device is mapped to a [JF Led](http://johnny-five.io/api/led/).
+
+    {
+          "id": "jf-pwm-1",
+          "class": "JohnnyFivePwmOutput",
+          "name": "Digital PWM Output (pin 3)",
+          "pin": "3",
+          "boardId": "1"
+    }
+
+It has the following configuration properties:
+
+| Property  | Default  | Type    | Description                                 |
+|:----------|:---------|:--------|:--------------------------------------------|
+| pin       |          | String  | Pin address of the (PWM capable) digital output           |
+| boardId   | -        | String  | Id of the board to be used                  |
+
+The Digital Output Device exhibits the following attributes:
+
+| Property      | Unit  | Type    | Acronym | Description                            |
+|:--------------|:------|:--------|:--------|:---------------------------------------|
+| state         | -     | Boolean | -       | Switch State, true is on, false is off |
+| dimlevel      | %     | Number  | -       | A percentage value of the PWM duty cycle | 
+
+The following predicates and actions are supported:
+
+* {device} is turned on|off
+* switch {device} on|off
+* toggle {device}
+* dim {device} to {value}
+
+### RGB LED
+
+`JohnnyFiveRgbLed` is based on the DimmerActuator device class. You need to provide
+the address of the output `pins` for red, green, and blue. The property `isAnode` is
+used to specify whether the LED has common anode or cathode.
+The device is mapped to a [JF Led.RGB](http://johnny-five.io/api/led.rgb/).
+
+    {
+          "id": "jf-pwm-1",
+          "class": "JohnnyFiveRgbLed",
+          "name": "RGB LED",
+          "boardId": "2",
+          "pins": {
+              "red": "GPIO16",
+              "green": "GPIO20",
+              "blue": "GPIO21"
+          },
+          "isAnode": true,
+    }
+
+It has the following configuration properties:
+
+| Property  | Default  | Type    | Description                                 |
+|:----------|:---------|:--------|:--------------------------------------------|
+| pins      |          | Object  | The pins assigned to the RGB LED, defined by an object with the following properties.           |
+| pins.red  |          | String  | The pin for red           |
+| pins.green |         | String  | The pin for green           |
+| pins.blue  |         | String  | The pin for blue           |
+| isAnode   | false    | Boolean | If set to true the LED is a common anode LED. Defaults to false, indicating a common cathode LED |
+| boardId   | -        | String  | Id of the board to be used                  |
+
+The Digital Output Device exhibits the following attributes:
+
+| Property      | Unit  | Type    | Acronym | Description                            |
+|:--------------|:------|:--------|:--------|:---------------------------------------|
+| state         | -     | Boolean | -       | Switch State, true is on, false is off |
+| dimlevel      | %     | Number  | -       | A percentage value of the PWM duty cycle | 
+| color         | -     | String  | RGB     | A 6-digit RGB hex string starting with, or a CSS color name, or a variable reference |
+
+The following predicates and actions are supported:
+
+* {device} is turned on|off
+* switch {device} on|off
+* toggle {device}
+* dim {device} to {value}
+* j5 set color {device} to {value}
 
 ### Presence Sensor
 
@@ -387,6 +472,6 @@ MIT-License: https://github.com/rwaldron/johnny-five/blob/master/LICENSE-MIT
 
 ## License
 
-Copyright (c) 2015-2016, Marcus Wittig and contributors. All rights reserved.
+Copyright (c) 2015-2017, Marcus Wittig and contributors. All rights reserved.
 
 [AGPL-3.0](https://github.com/mwittig/pimatic-johnny-five/blob/master/LICENSE)
