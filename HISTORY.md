@@ -1,5 +1,13 @@
 # Release History
 
+* 20170123, V0.9.10
+    * Added support for software PWM for raspi-io
+    * Added support for excluding pins from use with raspi-io. This might be useful if other GPIO drivers are used
+      like pimatic-dht-sensors
+    * Added RGBLedDevice to provide control for common cathode/common cathode LEDs and PCA9685,
+      an I2C-bus controlled 16-channel LED controller
+    * Revised README and docs
+    
 * 20170117, V0.9.9
     * Improved device schema for temperature unit properties to editable with device editor
     * Added debug mode property to enable plugin debugging mode
@@ -15,7 +23,7 @@
 * 20161105, V0.9.6
     * Fixed handling of i2c address property, issue #47
     * Remove data listener on destruction of temperature device
-    * Added helper to release pins for analaog sensors on destruction
+    * Added helper to release pins for analog sensors on destruction
     
 * 20161105, V0.9.5
     * fix for invalid I2C address problem, issue 46
