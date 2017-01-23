@@ -2,6 +2,7 @@ module.exports = (env) ->
 
   Promise = env.require 'bluebird'
   assert = env.require 'cassert'
+  _ = env.require 'lodash'
   M = env.matcher
   colors = require 'colornames'
   colorNames = colors.all().filter((v) -> v.css is true).map((v) -> v.name)
