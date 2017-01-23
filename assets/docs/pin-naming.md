@@ -12,7 +12,9 @@ Pin numbers can be specified using one of the following:
 * by Wiring Pi virtual pin number, e.g. "29"
 
 For Raspberry B+/2/3 the pinout and naming schemes are as shown in table below. Function names given in brackets 
- cannot be used for for pin assignments.
+ cannot be used for for pin assignments. As part of the 
+ [raspi-io Wiki, more details](https://github.com/nebrius/raspi-io/wiki/Pin-Information) can be found for the various 
+ types of Raspberry Pi boards.
 
 | WiringPi| Pin Name |  Header Pin | Header Pin   | Pin Name | WiringPi |
 |:--------|:---------|:------------|-------------:|:---------|:---------|
