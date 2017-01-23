@@ -1,5 +1,8 @@
 # Release History
 
+* 20170123, V0.9.11
+    * Bug fixture: added missing require statement for new action
+    
 * 20170123, V0.9.10
     * Added support for software PWM for raspi-io
     * Added support for excluding pins from use with raspi-io. This might be useful if other GPIO drivers are used
