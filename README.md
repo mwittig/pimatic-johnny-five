@@ -1,6 +1,8 @@
 
 # pimatic-johnny-five
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/mwittig/pimatic-johnny-five.svg)](https://greenkeeper.io/)
+
 [![npm version](https://badge.fury.io/js/pimatic-johnny-five.svg)](http://badge.fury.io/js/pimatic-johnny-five)
 [![Build Status](https://travis-ci.org/mwittig/pimatic-johnny-five.svg?branch=master)](https://travis-ci.org/mwittig/pimatic-johnny-five)
 
