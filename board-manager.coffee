@@ -53,7 +53,7 @@ module.exports = (env) ->
     _boardNotReadyHandler: (resolve, reject) ->
       return (error) =>
         @opts.board.removeListener "ready", @_boardReadyListener if @_boardReadyListener?
-        @_base.rejectWithError(reject, error)
+        @_base.rejectWithErrorString(reject, error)
 
     boardReady: () ->
       return new Promise( (resolve, reject) =>
@@ -62,9 +62,9 @@ module.exports = (env) ->
           if @boardIsReady
             resolve @virtual
           else
-            @_base.rejectWithError(reject, new Error "Board not ready")
+            @_base.rejectWithErrorString(reject, new Error "Board not ready")
         .catch (error) =>
-          @_base.rejectWithError(reject, error)
+          @_base.rejectWithErrorString(reject, error)
       )
 
     releasePin: (pin, controller) ->
