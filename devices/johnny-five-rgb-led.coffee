@@ -130,7 +130,7 @@ module.exports = (env) ->
         return @_base.rejectWithError Promise.reject, error
 
     setColor: (color) ->
-      @_base.debug "color change requested to: color"
+      @_base.debug "color change requested to: #{color}"
       return new Promise( (resolve, reject) =>
         @boardHandle.boardReady()
         .then =>
