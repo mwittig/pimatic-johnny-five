@@ -137,6 +137,7 @@ module.exports = (env) ->
       @boards = {}
       @debug = plugin.config.debug || false
       @_base = commons.base @, "BoardManager"
+      @piGpioInitialized = false
       super()
 
       boardConfigs = @config.boards
@@ -157,6 +158,16 @@ module.exports = (env) ->
       else
         @_base.error "Invalid plugin configuration. No boards configured"
 
+      plugin.framework.once 'destroy', (context) =>
+        promise = new Promise( (resolve, reject) =>
+          @_base.info "pimatic is shutting down"
+          if @piGpioInitialized
+            (require('pigpio').terminate)()
+            @_base.info "pigpio terminated"
+            @piGpioInitialized = false
+          resolve()
+        )
+        context.waitForIt promise
 
     createBoard: (options) ->
       switch options.boardType || 'arduino'
@@ -168,6 +179,11 @@ module.exports = (env) ->
           @board = new BoardWrapper options
         )
         when 'raspi-io' then (
+          unless @piGpioInitialized
+            @piGpioInitialized = true
+            @_base.info "pigpio hardwareRevision #{(require('pigpio')).hardwareRevision()}"
+            (require('pigpio').initialize)()
+            @_base.info "pigpio initialized"
           raspi = require 'raspi-io'
           raspiOptions =
             enableSoftPwm: true
