@@ -43,11 +43,11 @@
   "contributors": [
     {
       "name": "Ruben Oost",
-      "email": "info@kanedo.net"
+      "email": "ruben@oost.io"
     },
     {
       "name": "Gabriel Bretschner",
-      "email": "ruben@oost.io"
+      "email": "info@kanedo.net"
     }
   ],
   "configSchema": "johnny-five-config-schema.coffee",
@@ -65,7 +65,8 @@
   },
   "optionalDependencies": {
     "particle-io": "^0.14.0",
-    "raspi-io": "^8.0.1"
+    "raspi-io": "^8.0.1",
+    "pigpio": "^0.5.1"
   },
   "peerDependencies": {
     "pimatic": ">=0.8.0 <1.0.0"
