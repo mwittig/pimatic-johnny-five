@@ -1,5 +1,9 @@
 # Release History
 
+* 20170626, V0.9.12
+    * Updated Dependencies. Now using raspi-io@^8.0.1 which uses pigpio instead of wiringPI to overcome stability 
+      issues with 4.9 kernel.
+       
 * 20170123, V0.9.11
     * Bug fixture: added missing require statement for new action
     
