@@ -16,6 +16,7 @@ module.exports = (env) ->
     'johnny-five-temperature-humidity'
     'johnny-five-temperature-pressure'
     'johnny-five-rgb-led'
+    'johnny-five-servo'
   ]
     # convert kebap-case to camel-case notation with first character capitalized
     className = device.replace /(^[a-z])|(\-[a-z])/g, ($1) -> $1.toUpperCase().replace('-','')

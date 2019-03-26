@@ -309,4 +309,74 @@ module.exports = {
         type: "number"
         default:  16
   }
+  JohnnyFiveServo: {
+    title: "JohnnyFive Servo"
+    description: "JohnnyFive Servo"
+    type: "object"
+    properties:
+      boardId:
+        description: "Id of the board to be used"
+        type: "string"
+      controller:
+        description: "Controller interface type: DEFAULT, PCA9685"
+        type: "string"
+        default: "DEFAULT"
+      address:
+        description: "The I2C address if controller is PCA9685. If omitted the default address will be used in I2C mode"
+        type: "string"
+        default: ""
+      pin:
+        description: "The pin address"
+        type: "string"
+      type:
+        description: "The type of servo, one of standard or continuous"
+        type: "string"
+        default:  "standard"
+      range:
+        description: "The range of motion in degrees"
+        type: "array"
+        default: [
+          0,
+          180
+        ]
+        format: "table"
+        items:
+          type: "number"
+      buttons:
+        description: "The inputs to select from"
+        type: "array"
+        default: [
+          {
+            id: "min"
+          }
+          {
+            id: "max"
+          }
+          {
+            id: "center"
+          }
+          {
+            id: "stop"
+          }
+        ]
+        format: "table"
+        items:
+          type: "object"
+          properties:
+            id:
+              enum: [
+                "min", "max", "center", "home", "sweep", "stop", "cw", "ccw"
+              ]
+              description: "The input ids switchable by the AVR"
+            text:
+              type: "string"
+              description: """
+                The button text to be displayed. The id will be displayed if not set
+              """
+              required: false
+            confirm:
+              description: "Ask the user to confirm the input select"
+              type: "boolean"
+              default: false
+  }
 }
